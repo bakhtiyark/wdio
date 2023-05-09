@@ -48,7 +48,7 @@ describe("First test", () => {
 */
 
 // imports
-const { By, Builder } = require("selenium-webdriver");
+const { By, Builder, Select, until } = require("selenium-webdriver");
 require("chromedriver");
 
 // #1
@@ -74,9 +74,19 @@ const task2 = async () => {
   await driver
     .findElement(By.id("postform-name"))
     .sendKeys("how to gain dominance among developers");
-  await driver
-    .findElement(By.xpath(`//*[@id="postform-expiration"]/option[3]`))
-    .click();
+
+  const selectElement = await driver.findElement(
+    By.name("PostForm[expiration]")
+  );
+  const selectContainer = await driver
+    .findElement(By.className("select2"))
+  await driver.wait(
+    until.elementsLocated(By.css("form-control select2-hidden-accessible")),
+    30000
+  );
+  const select = new Select(selectElement);
+  await select.selectByValue("10M");
+  console.log(selectContainer)
 };
 
 //task1();
