@@ -36,7 +36,7 @@ git push origin master --force
 * Syntax is suspended for bash
 * Check that the code matches the one entered in paragraph 2
 */
-
+/*
 describe("First test", () => {
   it("first test", async () => {
     await browser.url("https://www.google.com");
@@ -45,3 +45,39 @@ describe("First test", () => {
     expect(pageTitle).toEqual("Google");
   });
 });
+*/
+
+// imports
+const { By, Builder } = require("selenium-webdriver");
+require("chromedriver");
+
+// #1
+const task1 = async () => {
+  let driver = await new Builder().forBrowser("chrome").build();
+  driver.get("https://pastebin.com");
+  await driver
+    .findElement(By.id("postform-text"))
+    .sendKeys("Hello from WebDriver");
+  await driver.findElement(By.id("postform-name")).sendKeys("helloweb");
+  setInterval(() => {
+    driver.quit();
+  }, 600000);
+};
+// #2
+const task2 = async () => {
+  let driver = await new Builder().forBrowser("chrome").build();
+  driver.get("https://pastebin.com");
+  await driver.findElement(By.id("postform-text"))
+    .sendKeys(`git config --global user.name "New Sheriff in Town"
+    git reset $ (git commit-tree HEAD ^ {tree} -m "Legacy code")
+    git push origin master --force`);
+  await driver
+    .findElement(By.id("postform-name"))
+    .sendKeys("how to gain dominance among developers");
+  await driver
+    .findElement(By.xpath(`//*[@id="postform-expiration"]/option[3]`))
+    .click();
+};
+
+//task1();
+task2();
