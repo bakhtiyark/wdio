@@ -16,16 +16,17 @@ const syntaxOptionContainerId = "select2-postform-format-container";
 const syntaxBashOption = "//li[text()='Bash']";
 const expirationContainer = "select2-postform-expiration-container";
 const expirationOption = "//li[text()='10 Minutes']";
+const submitBtnClassName = "btn -big";
 
 // #1
 const task1 = async () => {
   let driver = await new Builder().forBrowser("chrome").build();
   driver.get(website);
   await driver.findElement(By.id(textSpaceId)).sendKeys(message1);
+  await driver.findElement(By.id(expirationContainer)).click();
+  await driver.findElement(By.xpath(expirationOption)).click();
   await driver.findElement(By.id(postformTitleId)).sendKeys(postForm1);
-  setInterval(() => {
-    driver.quit();
-  }, 600000);
+  await driver.findElement(By.className(submitBtnClassName)).click();
 };
 // #2
 const task2 = async () => {
@@ -37,6 +38,9 @@ const task2 = async () => {
   await driver.findElement(By.id(expirationContainer)).click();
   await driver.findElement(By.xpath(expirationOption)).click();
   await driver.findElement(By.id(postformTitleId)).sendKeys(postForm2);
+  await driver.findElement(By.className(submitBtnClassName)).click();
+
+  await driver.wait(until.titleIs(`${postForm2} - Pastebin.com`),10000,"Something went wrong");
 };
 
 //task1();
