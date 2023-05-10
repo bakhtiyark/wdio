@@ -1,6 +1,7 @@
 ﻿// imports
 const { By, Builder, Select, until } = require("selenium-webdriver");
 require("chromedriver");
+
 // Variables
 
 const website = "https://pastebin.com";
@@ -21,17 +22,22 @@ const submitBtnClassName = "btn -big";
 // #1
 const task1 = async () => {
   let driver = await new Builder().forBrowser("chrome").build();
+
   driver.get(website);
+
   await driver.findElement(By.id(textSpaceId)).sendKeys(message1);
   await driver.findElement(By.id(expirationContainer)).click();
   await driver.findElement(By.xpath(expirationOption)).click();
   await driver.findElement(By.id(postformTitleId)).sendKeys(postForm1);
+
   await driver.findElement(By.className(submitBtnClassName)).click();
 };
 // #2
 const task2 = async () => {
   let driver = await new Builder().forBrowser("chrome").build();
+
   driver.get(website);
+
   await driver.findElement(By.id(textSpaceId)).sendKeys(message2);
   await driver.findElement(By.id(syntaxOptionContainerId)).click();
   await driver.findElement(By.xpath(syntaxBashOption)).click();
@@ -44,4 +50,4 @@ const task2 = async () => {
 };
 
 //task1();
-task2();
+//task2();
