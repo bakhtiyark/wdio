@@ -1,64 +1,28 @@
-﻿/*
-Install  WebdriverIO  and do the following task:
-
-(I Can Win) When performing the task, you must use the capabilities of Selenium WebDriver,
-the unit testing framework and the Page Object concept. Automate the following script:
-
-1. Open https://pastebin.com or a similar service in any browser
-
-2. Create a New Paste with the following details:
-
-* Code: "Hello from WebDriver"
-* Paste Expiration: "10 Minutes"
-* Paste Name / Title: "helloweb"
-
-
-(Bring It On) When performing the task, you need to use the capabilities of Selenium WebDriver, the unit testing framework and the Page Object concept. Automate the following script:
-
-1. Open https://pastebin.com or a similar service in any browser
-
-2. Create a New Paste with the following details:
-
-* Code:
-
-git config --global user.name "New Sheriff in Town"
-
-git reset $ (git commit-tree HEAD ^ {tree} -m "Legacy code")
-
-git push origin master --force
-
-* Syntax Highlighting: "Bash"
-* Paste Expiration: "10 Minutes"
-* Paste Name / Title: "how to gain dominance among developers"
-
-3. Save paste and check the following:
-* Browser page title matches Paste Name / Title
-* Syntax is suspended for bash
-* Check that the code matches the one entered in paragraph 2
-*/
-/*
-describe("First test", () => {
-  it("first test", async () => {
-    await browser.url("https://www.google.com");
-    const pageTitle = await browser.getTitle();
-
-    expect(pageTitle).toEqual("Google");
-  });
-});
-*/
-
-// imports
+﻿// imports
 const { By, Builder, Select, until } = require("selenium-webdriver");
 require("chromedriver");
+// Variables
+
+const website = "https://pastebin.com";
+const textSpaceId = "postform-text";
+const message1 = "Hello from WebDriver";
+const message2 = `git config --global user.name "New Sheriff in Town"
+git reset $ (git commit-tree HEAD ^ {tree} -m "Legacy code")
+git push origin master --force`;
+const postformTitleId = "postform-name";
+const postForm1 = "helloweb";
+const postForm2 = "how to gain dominance among developers";
+const syntaxOptionContainerId = "select2-postform-format-container";
+const syntaxBashOption = "//li[text()='Bash']";
+const expirationContainer = "select2-postform-expiration-container";
+const expirationOption = "//li[text()='10 Minutes']";
 
 // #1
 const task1 = async () => {
   let driver = await new Builder().forBrowser("chrome").build();
-  driver.get("https://pastebin.com");
-  await driver
-    .findElement(By.id("postform-text"))
-    .sendKeys("Hello from WebDriver");
-  await driver.findElement(By.id("postform-name")).sendKeys("helloweb");
+  driver.get(website);
+  await driver.findElement(By.id(textSpaceId)).sendKeys(message1);
+  await driver.findElement(By.id(postformTitleId)).sendKeys(postForm1);
   setInterval(() => {
     driver.quit();
   }, 600000);
@@ -66,27 +30,13 @@ const task1 = async () => {
 // #2
 const task2 = async () => {
   let driver = await new Builder().forBrowser("chrome").build();
-  driver.get("https://pastebin.com");
-  await driver.findElement(By.id("postform-text"))
-    .sendKeys(`git config --global user.name "New Sheriff in Town"
-    git reset $ (git commit-tree HEAD ^ {tree} -m "Legacy code")
-    git push origin master --force`);
-  await driver
-    .findElement(By.id("postform-name"))
-    .sendKeys("how to gain dominance among developers");
-
-  const selectElement = await driver.findElement(
-    By.name("PostForm[expiration]")
-  );
-  const selectContainer = await driver
-    .findElement(By.className("select2"))
-  await driver.wait(
-    until.elementsLocated(By.css("form-control select2-hidden-accessible")),
-    30000
-  );
-  const select = new Select(selectElement);
-  await select.selectByValue("10M");
-  console.log(selectContainer)
+  driver.get(website);
+  await driver.findElement(By.id(textSpaceId)).sendKeys(message2);
+  await driver.findElement(By.id(syntaxOptionContainerId)).click();
+  await driver.findElement(By.xpath(syntaxBashOption)).click();
+  await driver.findElement(By.id(expirationContainer)).click();
+  await driver.findElement(By.xpath(expirationOption)).click();
+  await driver.findElement(By.id(postformTitleId)).sendKeys(postForm2);
 };
 
 //task1();
