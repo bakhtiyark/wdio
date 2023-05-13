@@ -1,0 +1,14 @@
+﻿{
+    "website": "https://pastebin.com",
+    "textSpaceId": "postform-text",
+    "message1": "Hello from WebDriver",
+    "message2": "git config --global user.name \"New Sheriff in Town\"\ngit reset $ (git commit-tree HEAD ^ {tree} -m \"Legacy code\")\ngit push origin master --force",
+    "postformTitleId": "postform-name",
+    "postForm1": "helloweb",
+    "postForm2": "how to gain dominance among developers",
+    "syntaxOptionContainerId": "select2-postform-format-container",
+    "syntaxBashOption": "//li[text()='Bash']",
+    "expirationContainer": "select2-postform-expiration-container",
+    "expirationOption": "//li[text()='10 Minutes']",
+    "submitBtnClassName": "btn -big"
+  }
