@@ -39,11 +39,11 @@ const task2 = async () => {
   await driver.findElement(By.className(constants.submitBtnClassName)).click();
 
   await driver.wait(
-    until.titleIs(`${postForm2} - Pastebin.com`),
+    until.titleIs(`${constants.postForm2} - Pastebin.com`),
     10000,
     "Something went wrong"
   );
 };
 
-task1();
-task2();
+//task1();
+//task2();
