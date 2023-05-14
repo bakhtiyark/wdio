@@ -1,0 +1,15 @@
+﻿{
+    "website": "https://cloud.google.com/",
+    "searchquery":"Google Cloud Platform Pricing Calculator",
+    "quantity": 4,
+    "select_109": "Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS",
+    "select_113": "Regular",
+    "series": "n1-standard-8 (vCPUs: 8, RAM: 30 GB)",
+    "Add GPUs": {
+        "Number of GPUs": 1,
+        "GPU type": "NVIDIA Tesla V100"
+    },
+    "select_156": "2x375 Gb",
+    "select_159": "Frankfurt (europe-west3)",
+    "select_164": "1 Year"
+}
