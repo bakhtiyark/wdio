@@ -18,5 +18,7 @@ const smoke = async () => {
     10000, "Element not Found"
   );
   await ele.click()
+
+  
 };
 smoke();
