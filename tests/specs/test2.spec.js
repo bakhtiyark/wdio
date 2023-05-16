@@ -1,7 +1,8 @@
 ﻿// imports
-const { By, Builder, Select, until, Key } = require("selenium-webdriver");
+const { By, Builder, Select, until, Key, Browser } = require("selenium-webdriver");
 require("chromedriver");
 const constants = require("../../constants/compute.json");
+// to be rewritten with POM
 
 // #1
 const smoke = async () => {
@@ -15,10 +16,11 @@ const smoke = async () => {
     until.elementLocated(
       By.xpath(`//b[contains(text(), "Google Cloud Platform ")]/parent::a`)
     ),
-    10000, "Element not Found"
+    10000,
+    "Element not Found"
   );
-  await ele.click()
+  await ele.click();
 
-  
+  // iframe
 };
 smoke();
