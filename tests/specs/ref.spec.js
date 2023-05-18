@@ -1,8 +1,12 @@
 ﻿// imports
-const { By, Builder, Select, until, Key } = require("selenium-webdriver");
-require("chromedriver");
+const { page } = require("../../po/index");
 const constants = require("../../constants/compute.json");
 
 describe("Hurt me plenty", function () {
-  it("GC", function () {});
+  before(async () => {
+    await page("home").open();
+    const search = await page("home").header.input("search");
+    await search.setValue(constants.searchquery);
+    await page("home").header.submit();
+  });
 });
