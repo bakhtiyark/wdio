@@ -14,5 +14,7 @@ describe("Hurt me plenty", function () {
     );
     searchTarget.waitForDisplayed();
     searchTarget.click();
+
+    await page("calculator").enterIframe();
   });
 });
