@@ -20,7 +20,7 @@ class ComputeEngineEstimateComponent extends BaseComponent {
       os: '//div[contains(text(),"Operating System / Software:")]',
       gpu: '//div[contains(text(),"Operating System / GPU dies:")]',
       ssd: '//div[contains(text(),"Local SSD:")]',
-      estimatedCost: '//div[contains(text(),"Estimated Component Cost:")]',
+      estimatedCost: '//div//b[contains(text(),"Estimated Component Cost:")]',
     };
     return this.rootEl.$(selectors[name]);
   }
