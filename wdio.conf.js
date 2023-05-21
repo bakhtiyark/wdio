@@ -1,4 +1,6 @@
-const fs = require("fs")
+const fs = require("fs");
+const reportDir = "tests/reports";
+const screenshotsDir = "tests/reports/screenshots";
 exports.config = {
   //
   // ====================
@@ -137,7 +139,18 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: [
+    "spec",
+    [
+      "junit",
+      {
+        outputDir: reportDir,
+        outputFileFormat: function () {
+          return `Result ${new Date().toDateString()}.txt`;
+        },
+      },
+    ],
+  ],
 
   //
   // Options to be passed to Mocha.
@@ -240,13 +253,14 @@ exports.config = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  afterTest: function (
+  afterTest: async function (
     test,
     context,
     { error, result, duration, passed, retries }
   ) {
-    if (error){
-
+    if (error) {
+      const filename = `${test.title} ${new Date().toDateString()}.png`;
+      await browser.saveScreenshot(`${screenshotsDir}/${filename}`);
     }
   },
 
