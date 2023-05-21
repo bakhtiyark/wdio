@@ -2,6 +2,7 @@
 const TabsComponent = require("../components/calculator/tabs.component");
 const TabsBlockComponent = require("../components/calculator/tabsBlock.component");
 const { By } = require("selenium-webdriver");
+const EstimateBlockComponent = require("../components/calculator/estimateBlock.component");
 
 const element = "//iframe[contains(@name,'goog_')]";
 class Calculator extends BasePage {
@@ -9,6 +10,7 @@ class Calculator extends BasePage {
     super("");
     this.tabs = new TabsComponent();
     this.tabsBlock = new TabsBlockComponent();
+    this.estimateBlock = new EstimateBlockComponent();
   }
   async enterIframe() {
     await browser.switchToFrame(await $("//devsite-iframe//iframe"));

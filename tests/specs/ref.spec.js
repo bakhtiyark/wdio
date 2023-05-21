@@ -1,9 +1,10 @@
 ﻿// imports
 const { page } = require("../../po/index");
 const constants = require("../../constants/compute.json");
+const assert = require("node:assert/strict");
 
 describe("Hurt me plenty", function () {
-  it("Search", async () => {
+  before("Search", async () => {
     // Start
     await page("home").open();
     const search = await page("home").header.input("search");
@@ -125,8 +126,23 @@ describe("Hurt me plenty", function () {
     await commitedUsageValue.waitForDisplayed();
     await commitedUsageValue.click();
 
-    const calculationButton = await page("calculator").tabsBlock.addToEstimateButton
-    calculationButton.waitForDisplayed()
-    calculationButton.click()
+    await page("calculator").tabsBlock.addToEstimateButton.click();
+  });
+
+  describe("Conformance check", () => {
+    it("should have same location", async () => {
+      const location = await page(
+        "calculator"
+      ).estimateBlock.computerEngineEstimate.item("location");
+      await location.waitForDisplayed();
+      const locationTextContent = await location.getText();
+      assert.equal(
+        locationTextContent.split(" ")[1],
+        constants.locationAlt.split(" ")[0],
+        `Invalid value, expected ${constants.locationAlt.split(" ")[0]} got ${
+          locationTextContent.split(" ")[1]
+        }`
+      );
+    });
   });
 });
