@@ -40,10 +40,10 @@ describe("Hurt me plenty", function () {
     ).tabsBlock.computeEngineForm.item("series");
     await seriesElement.waitForDisplayed();
     await seriesElement.click();
-    
-    const seriesValue = await page(
-      "calculator"
-    ).tabsBlock.dropdownValue(constants.series);
+
+    const seriesValue = await page("calculator").tabsBlock.dropdownValue(
+      constants.series
+    );
     await seriesValue.waitForDisplayed();
     await seriesValue.click();
 
@@ -52,12 +52,81 @@ describe("Hurt me plenty", function () {
     ).tabsBlock.computeEngineForm.item("instance");
     await instanceElement.waitForDisplayed();
     await instanceElement.click();
-    
-    const instanceValue = await page(
-      "calculator"
-    ).tabsBlock.dropdownValue(constants.instance);
+
+    const instanceValue = await page("calculator").tabsBlock.dropdownValue(
+      constants.instance
+    );
     await instanceValue.waitForDisplayed(20000);
     await instanceValue.click();
 
+    const addGPUElement = await page(
+      "calculator"
+    ).tabsBlock.computeEngineForm.item("addGPUs");
+    await addGPUElement.waitForDisplayed();
+    await addGPUElement.click();
+
+    const gpuTypeElement = await page(
+      "calculator"
+    ).tabsBlock.computeEngineForm.item("gpuType");
+    await gpuTypeElement.waitForDisplayed();
+    await gpuTypeElement.click();
+    const gpuTypeValue = await page("calculator").tabsBlock.dropdownValue(
+      constants.gpuType
+    );
+    await gpuTypeValue.waitForDisplayed();
+    await gpuTypeValue.click();
+
+    const gpuCountElement = await page(
+      "calculator"
+    ).tabsBlock.computeEngineForm.item("gpuCount");
+    await gpuCountElement.waitForDisplayed();
+    await gpuCountElement.click();
+
+    const gpuCountValue = await page("calculator").tabsBlock.dropdownValue(
+      constants.gpuCount
+    );
+    await gpuCountValue.waitForDisplayed();
+    await gpuCountValue.click();
+
+    const ssdElement = await page(
+      "calculator"
+    ).tabsBlock.computeEngineForm.item("ssd");
+    await ssdElement.waitForDisplayed();
+    await ssdElement.click();
+
+    const ssdValue = await page("calculator").tabsBlock.dropdownValue(
+      constants.ssd
+    );
+    await ssdValue.waitForDisplayed();
+    await ssdValue.click();
+
+    const locationElement = await page(
+      "calculator"
+    ).tabsBlock.computeEngineForm.item("location");
+    await locationElement.waitForDisplayed();
+    await locationElement.click();
+
+    // NVIDIA Tesla V100 is currently unavailable in Frankfurt, thus alternative location has been selected.
+    const locationValue = await page("calculator").tabsBlock.dropdownValue(
+      constants.locationAlt
+    );
+    await locationValue.waitForDisplayed();
+    await locationValue.click();
+
+    const committedUsageElement = await page(
+      "calculator"
+    ).tabsBlock.computeEngineForm.item("cud");
+    await committedUsageElement.waitForDisplayed();
+    await committedUsageElement.click();
+
+    const commitedUsageValue = await page("calculator").tabsBlock.dropdownValue(
+      constants.cud
+    );
+    await commitedUsageValue.waitForDisplayed();
+    await commitedUsageValue.click();
+
+    const calculationButton = await page("calculator").tabsBlock.addToEstimateButton
+    calculationButton.waitForDisplayed()
+    calculationButton.click()
   });
 });

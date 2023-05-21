@@ -8,8 +8,9 @@
     "instance": "n1-standard-8 (vCPUs: 8, RAM: 30GB)",
     "Add GPUs": "checked",
     "gpuType": "NVIDIA Tesla V100",
-    "gpuCount": 2,
-    "ssd": "2x375 Gb",
+    "gpuCount": "2",
+    "ssd": "2x375 GB",
     "location": "Frankfurt (europe-west3)",
+    "locationAlt": "Netherlands (europe-west4)",
     "cud": "1 Year"
 }
