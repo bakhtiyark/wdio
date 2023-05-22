@@ -6,7 +6,7 @@ class SendEstimateEmailComponent extends BaseComponent {
   }
 
   get sendEstimateButton() {
-    return this.rootEl.$(`//button[@ng-click="emailQuote.emailQuote(true); emailQuote.$mdDialog.hide()"]`);
+    return this.rootEl.$(`//button[contains(text(),"Send Email")]`);
   }
 
   item(name) {

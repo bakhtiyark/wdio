@@ -128,6 +128,12 @@ describe("Hardcore", function () {
 
     await page("calculator").tabsBlock.addToEstimateButton.click();
 
+    const cost = await page(
+      "calculator"
+    ).estimateBlock.computerEngineEstimate.item("estimatedCost");
+    await cost.waitForDisplayed();
+    const costTextContent = await cost.getText();
+
     //Email manipulation
 
     await page("calculator").estimateBlock.emailFormButton.click();
@@ -135,7 +141,8 @@ describe("Hardcore", function () {
     await page("calculator").exitIframe();
 
     const calcPageUrl = await browser.getUrl();
-    await browser.newWindow("https://10minutemail.com/");
+    const emailPageUrl = "https://10minutemail.com/";
+    await browser.newWindow(emailPageUrl);
 
     const tempEmailButton = await page("email").mailBox.copyEmailButton;
     await tempEmailButton.waitForDisplayed(40000);
@@ -144,13 +151,30 @@ describe("Hardcore", function () {
     await browser.switchWindow(calcPageUrl);
 
     await page("calculator").enterIframe();
-    
-    const tempEmail = await page("calculator").estimateBlock.sendEstimate.item("email");
+
+    const tempEmail = await page("calculator").estimateBlock.sendEstimate.item(
+      "email"
+    );
     await tempEmail.waitForDisplayed(40000);
     await tempEmail.click();
-    await tempEmail.keys(["Control", "v"])
+    await browser.keys(["Control", "v"]);
     await page("calculator").estimateBlock.sendEstimateButton.click();
-    
+
+    await browser.switchWindow(emailPageUrl);
+    browser.scroll(0, 400);
+    const estimateMessage = await page("email").mailMessages.message;
+    estimateMessage.waitForDisplayed(50000);
+    estimateMessage.click();
+
+    const mailedCost = await page("email").mailMessages.price;
+    mailedCost.waitForDisplayed(50000);
+    const mailedCostTextContent = await mailedCost.getText();
+
+    assert.equal(
+      cost.split(" ")[4],
+      mailedCostTextContent.split(" ")[4],
+      `Invalid value, expected ${cost} got ${mailedCostTextContent}`
+    );
   });
   /*
   describe("Conformance check", () => {
