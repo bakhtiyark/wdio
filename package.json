@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio run ./wdio.conf.js --spec tests/specs/ref.spec.js",
+    "test2": "wdio run ./wdio.conf.js --spec tests/specs/ref2.spec.js",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "keywords": [],

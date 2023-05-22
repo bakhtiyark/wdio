@@ -1,5 +1,7 @@
 ﻿## modules
 node_modules
+## reports
+tests/reports
 ## unfinished task
 ## draft
 trash.js

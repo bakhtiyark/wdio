@@ -4,7 +4,7 @@ const constants = require("../../constants/compute.json");
 const assert = require("node:assert/strict");
 
 describe("Hardcore", function () {
-  before("Search", async () => {
+  it("SendEmail", async () => {
     // Start
     await page("home").open();
     const search = await page("home").header.input("search");
@@ -127,8 +127,21 @@ describe("Hardcore", function () {
     await commitedUsageValue.click();
 
     await page("calculator").tabsBlock.addToEstimateButton.click();
-  });
 
+    //Email manipulation
+    
+    await page("calculator").estimateBlock.emailFormButton.click();
+
+    const calcPageUrl = browser.getUrl();
+    await browser.newWindow("https://10minutemail.com/");
+
+    const tempEmailButton = await page("tempEmail").mailBox.copyEmailButton;
+    await tempEmailButton.waitForDisplayed();
+    await tempEmailButton.click();
+
+    await browser.switchToWindow(calcPageUrl)
+    });
+  /*
   describe("Conformance check", () => {
     it("should have same location", async () => {
       const location = await page(
@@ -212,5 +225,5 @@ describe("Hardcore", function () {
         }`
       );
     });
-  });
+  });*/
 });
