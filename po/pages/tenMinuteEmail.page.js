@@ -1,11 +1,13 @@
 ﻿const BasePage = require("./base.page");
 const MailBoxComponent = require("../components/extra/mailBox.component");
-const MailContentComponent = require("../components/extra/mailContent.component");
+const MailMessagesComponent = require("../components/extra/mailMessages.component");
+
 class TenMinuteEmailPage extends BasePage {
   constructor() {
     super("https://10minutemail.com");
     this.mailBox = new MailBoxComponent();
-    this.mailContent = new MailContentComponent();
+    this.mailMessages = new MailMessagesComponent();
   }
 }
+
 module.exports = TenMinuteEmailPage;

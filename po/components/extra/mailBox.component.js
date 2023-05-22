@@ -2,10 +2,13 @@
 
 class MailBoxComponent extends BaseComponent {
   constructor() {
-    super("#mail_messages");
+    super("#main_content");
   }
   get copyEmailButton() {
-    return $(this.rootEl.$("#copy_address"));
+    return this.rootEl.$("#copy_address");
+  }
+  get email() {
+    return this.rootEl.$("#mail_address");
   }
 }
 

@@ -1,6 +1,6 @@
 ﻿const BaseComponent = require("../common/base.component");
 
-class MailContentComponent extends BaseComponent {
+class MailMessagesComponent extends BaseComponent {
   constructor() {
     super("#main_content");
   }
@@ -9,4 +9,4 @@ class MailContentComponent extends BaseComponent {
   }
 }
 
-module.exports = MailContentComponent;
+module.exports = MailMessagesComponent;

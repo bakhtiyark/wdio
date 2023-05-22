@@ -16,5 +16,9 @@ class Calculator extends BasePage {
     await browser.switchToFrame(await $("//devsite-iframe//iframe"));
     await browser.switchToFrame(await $("#myFrame"));
   }
+  async exitIframe() {
+    const handles = await browser.getWindowHandles();
+    await browser.switchToWindow(handles[0]);
+  }
 }
 module.exports = Calculator;

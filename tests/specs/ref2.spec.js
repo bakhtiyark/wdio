@@ -129,18 +129,29 @@ describe("Hardcore", function () {
     await page("calculator").tabsBlock.addToEstimateButton.click();
 
     //Email manipulation
-    
+
     await page("calculator").estimateBlock.emailFormButton.click();
 
-    const calcPageUrl = browser.getUrl();
+    await page("calculator").exitIframe();
+
+    const calcPageUrl = await browser.getUrl();
     await browser.newWindow("https://10minutemail.com/");
 
-    const tempEmailButton = await page("tempEmail").mailBox.copyEmailButton;
-    await tempEmailButton.waitForDisplayed();
+    const tempEmailButton = await page("email").mailBox.copyEmailButton;
+    await tempEmailButton.waitForDisplayed(40000);
     await tempEmailButton.click();
 
-    await browser.switchToWindow(calcPageUrl)
-    });
+    await browser.switchWindow(calcPageUrl);
+
+    await page("calculator").enterIframe();
+    
+    const tempEmail = await page("calculator").estimateBlock.sendEstimate.item("email");
+    await tempEmail.waitForDisplayed(40000);
+    await tempEmail.click();
+    await tempEmail.keys(["Control", "v"])
+    await page("calculator").estimateBlock.sendEstimateButton.click();
+    
+  });
   /*
   describe("Conformance check", () => {
     it("should have same location", async () => {
