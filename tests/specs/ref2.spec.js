@@ -158,16 +158,16 @@ describe("Hardcore", function () {
     await tempEmail.waitForDisplayed(40000);
     await tempEmail.click();
     await browser.keys(["Control", "v"]);
-    await page("calculator").estimateBlock.sendEstimateButton.click();
+    await page("calculator").estimateBlock.sendEstimate.sendEstimateButton.click();
 
     await browser.switchWindow(emailPageUrl);
-    browser.scroll(0, 400);
+    browser.scroll(0, -400);
     const estimateMessage = await page("email").mailMessages.message;
-    estimateMessage.waitForDisplayed(50000);
+    estimateMessage.waitForDisplayed({ timeout:150000, interval:75000 })
     estimateMessage.click();
 
     const mailedCost = await page("email").mailMessages.price;
-    mailedCost.waitForDisplayed(50000);
+    mailedCost.waitForDisplayed(150000);
     const mailedCostTextContent = await mailedCost.getText();
 
     assert.equal(
@@ -176,89 +176,4 @@ describe("Hardcore", function () {
       `Invalid value, expected ${cost} got ${mailedCostTextContent}`
     );
   });
-  /*
-  describe("Conformance check", () => {
-    it("should have same location", async () => {
-      const location = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("location");
-      await location.waitForDisplayed();
-      const locationTextContent = await location.getText();
-      assert.equal(
-        locationTextContent.split(" ")[1],
-        constants.locationAlt.split(" ")[0],
-        `Invalid value, expected ${constants.locationAlt.split(" ")[0]} got ${
-          locationTextContent.split(" ")[1]
-        }`
-      );
-    });
-    it("Should have same commitment term", async () => {
-      const cud = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("cud");
-      await cud.waitForDisplayed();
-      const cudTextContent = await cud.getText();
-      assert.equal(
-        cudTextContent.split(" ")[2],
-        constants.cud.split(" ")[0],
-        `Invalid value, expected ${constants.cud.split(" ")[0]} got ${
-          cudTextContent.split(" ")[1]
-        }`
-      );
-    });
-    it("Should have same VM class", async () => {
-      const vmclass = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("class");
-      await vmclass.waitForDisplayed();
-      const vmclassTextContent = await vmclass.getText();
-      assert.equal(
-        vmclassTextContent.split(" ")[2],
-        constants.class,
-        `Invalid value, expected ${constants.class} got ${
-          vmclassTextContent.split(" ")[1]
-        }`
-      );
-    });
-    it("Should have same instance type", async () => {
-      const instance = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("instance");
-      await instance.waitForDisplayed();
-      const instanceTextContent = await instance.getText();
-      assert.ok(
-        instanceTextContent
-          .toString()
-          .includes(constants.instance.split(" ")[0])
-      );
-    });
-    it("Should have same SSD", async () => {
-      const ssd = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("ssd");
-      await ssd.waitForDisplayed();
-      const ssdTextContent = await ssd.getText();
-      assert.equal(
-        ssdTextContent.split(" ")[2],
-        constants.ssd.split(" ")[0],
-        `Invalid value, expected ${constants.ssd} got ${
-          ssdTextContent.split(" ")[2]
-        }`
-      );
-    });
-    it("Should have same price per month as if filled manually", async () => {
-      const cost = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("estimatedCost");
-      await cost.waitForDisplayed();
-      const costTextContent = await cost.getText();
-      assert.equal(
-        costTextContent.split(" ")[4],
-        constants.estimatedCost,
-        `Invalid value, expected ${constants.estimatedCost} got ${
-          costTextContent.split(" ")[4]
-        }`
-      );
-    });
-  });*/
 });

@@ -146,7 +146,7 @@ exports.config = {
       {
         outputDir: reportDir,
         outputFileFormat: function () {
-          return `Result ${new Date().toDateString()}.txt`;
+          return `Result ${new Date().toDateString()}.xml`;
         },
       },
     ],
