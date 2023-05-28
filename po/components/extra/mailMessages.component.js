@@ -2,10 +2,10 @@
 
 class MailMessagesComponent extends BaseComponent {
   constructor() {
-    super("#mail_messages");
+    super(".mail_messages");
   }
   get message() {
-    return this.rootEl.$("#mail_messages_content");
+    return this.rootEl.$(".mail_message");
   }
   get price(){
     return this.rootEl.$('//h2[contains(text(),"Estimated Monthly Cost:")]')

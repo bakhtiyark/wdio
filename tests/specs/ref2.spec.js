@@ -145,7 +145,10 @@ describe("Hardcore", function () {
     await browser.newWindow(emailPageUrl);
 
     const tempEmailButton = await page("email").mailBox.copyEmailButton;
-    await tempEmailButton.waitForDisplayed(40000);
+    await tempEmailButton.waitForDisplayed({
+      timeout: 150000,
+      interval: 75000,
+    });
     await tempEmailButton.click();
 
     await browser.switchWindow(calcPageUrl);
@@ -155,25 +158,27 @@ describe("Hardcore", function () {
     const tempEmail = await page("calculator").estimateBlock.sendEstimate.item(
       "email"
     );
-    await tempEmail.waitForDisplayed(40000);
+    await tempEmail.waitForDisplayed({ timeout: 150000, interval: 75000 });
     await tempEmail.click();
     await browser.keys(["Control", "v"]);
-    await page("calculator").estimateBlock.sendEstimate.sendEstimateButton.click();
+    await page(
+      "calculator"
+    ).estimateBlock.sendEstimate.sendEstimateButton.click();
 
     await browser.switchWindow(emailPageUrl);
-    browser.scroll(0, -400);
+    //browser.scroll(0, 600);
     const estimateMessage = await page("email").mailMessages.message;
-    estimateMessage.waitForDisplayed({ timeout:150000, interval:75000 })
+    estimateMessage.waitForDisplayed({ timeout: 600000, interval: 5000 });
     estimateMessage.click();
 
     const mailedCost = await page("email").mailMessages.price;
-    mailedCost.waitForDisplayed(150000);
+    mailedCost.waitForDisplayed({ timeout: 600000, interval: 5000 });
     const mailedCostTextContent = await mailedCost.getText();
 
     assert.equal(
-      cost.split(" ")[4],
+      costTextContent.split(" ")[4],
       mailedCostTextContent.split(" ")[4],
-      `Invalid value, expected ${cost} got ${mailedCostTextContent}`
+      `Invalid value, expected ${costTextContent} got ${mailedCostTextContent}`
     );
   });
 });
