@@ -144,8 +144,9 @@ describe("Hardcore", function () {
     const emailPageUrl = "https://10minutemail.com/";
     await browser.newWindow(emailPageUrl);
 
+    const tempEmail10 = await page("email").mailBox.email;
     const tempEmailButton = await page("email").mailBox.copyEmailButton;
-    await tempEmailButton.waitForDisplayed({
+    await tempEmail10.waitForDisplayed({
       timeout: 150000,
       interval: 75000,
     });
@@ -164,9 +165,11 @@ describe("Hardcore", function () {
     await page(
       "calculator"
     ).estimateBlock.sendEstimate.sendEstimateButton.click();
+    await page("calculator").exitIframe();
 
     await browser.switchWindow(emailPageUrl);
     //browser.scroll(0, 600);
+    
     const estimateMessage = await page("email").mailMessages.message;
     estimateMessage.waitForDisplayed({ timeout: 600000, interval: 5000 });
     estimateMessage.click();
