@@ -169,13 +169,16 @@ describe("Hardcore", function () {
 
     await browser.switchWindow(emailPageUrl);
     //browser.scroll(0, 600);
-    
+
     const estimateMessage = await page("email").mailMessages.message;
-    estimateMessage.waitForDisplayed({ timeout: 600000, interval: 5000 });
+    estimateMessage.waitForDisplayed({ timeout: 1600000, interval: 5000 });
+    console.log(await estimateMessage);
+
     estimateMessage.click();
 
     const mailedCost = await page("email").mailMessages.price;
     mailedCost.waitForDisplayed({ timeout: 600000, interval: 5000 });
+    console.log(await mailedCost);
     const mailedCostTextContent = await mailedCost.getText();
 
     assert.equal(

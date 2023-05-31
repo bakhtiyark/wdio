@@ -3,6 +3,7 @@ node_modules
 ## reports
 tests/reports
 ## unfinished task
+refchai.spec.js
 ## draft
-trash.js
+trash
 driver-logs

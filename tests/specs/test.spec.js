@@ -46,4 +46,4 @@ const task2 = async () => {
 };
 
 //task1();
-//task2();
+task2();

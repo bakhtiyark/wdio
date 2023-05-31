@@ -2,7 +2,7 @@
 
 class MailMessagesComponent extends BaseComponent {
   constructor() {
-    super(".mail_messages");
+    super('//*[@id="mail_messages"]');
   }
   get message() {
     return this.rootEl.$(".mail_message");
