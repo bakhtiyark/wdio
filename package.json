@@ -21,9 +21,11 @@
     "@wdio/spec-reporter": "^8.10.2",
     "chai": "^4.3.7",
     "chromedriver": "^113.0.0",
-    "wdio-chromedriver-service": "^8.1.1"
+    "wdio-chromedriver-service": "^8.1.1",
+    "wdio-geckodriver-service": "^5.0.1"
   },
   "dependencies": {
+    "geckodriver": "^4.0.2",
     "selenium-webdriver": "^4.9.1"
   }
 }

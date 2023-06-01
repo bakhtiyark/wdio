@@ -165,19 +165,20 @@ describe("Hardcore", function () {
     //browser.scroll(0, 600);
 
     const estimateMessage = await page("alt2Email").mailBox.email;
-    estimateMessage.waitForDisplayed({
+    await estimateMessage.waitForDisplayed({
       timeout: 1600000,
       interval: 5000,
       timeoutMsg: "Message hasn't arrived at specified timeout",
     });
     console.log(await estimateMessage);
-
-    estimateMessage.click();
-    await browser.switchToFrame(await $(`//iframe[@id="iframe"]`));
+    await estimateMessage.click();
+    const messageIframe = await $(`//iframe[@id="iframe"]`)
+    await browser.waitUntil(await messageIframe.isExisting(), { timeout: 500000 });
+    await browser.switchToFrame(messageIframe);
 
     const mailedCost = await page("alt2Email").mailBox.price;
-    mailedCost.waitForDisplayed({ timeout: 600000, interval: 5000 });
-    console.log(await mailedCost);
+    await mailedCost.waitForDisplayed({ timeout: 600000, interval: 5000 });
+    console.log(await ` Mailed cost is ${mailedCost}`);
     const mailedCostTextContent = await mailedCost.getText();
 
     assert.equal(
@@ -187,59 +188,3 @@ describe("Hardcore", function () {
     );
   });
 });
-
-//Email manipulation
-/*
-    const calcPageUrl = await browser.getUrl();
-    const emailPageUrl = "https://10minutemail.com/";
-    await browser.newWindow(emailPageUrl);
-
-    const tempEmail10 = await page("email").mailBox.email;
-    const tempEmailButton = await page("email").mailBox.copyEmailButton;
-    await tempEmail10.waitForDisplayed({
-      timeout: 150000,
-      interval: 75000,
-    });
-    await tempEmailButton.click();
-
-    await browser.switchWindow(calcPageUrl);
-
-    await page("calculator").enterIframe();
-
-    const tempEmail = await page("calculator").estimateBlock.sendEstimate.item(
-      "email"
-    );
-    await tempEmail.waitForDisplayed({ timeout: 150000, interval: 75000 });
-    await tempEmail.click();
-    await browser.keys(["Control", "v"]);
-    await page(
-      "calculator"
-    ).estimateBlock.sendEstimate.sendEstimateButton.click();
-    await page("calculator").exitIframe();
-
-    await browser.switchWindow(emailPageUrl);
-    //browser.scroll(0, 600);
-
-    this.timeout();
-    await browser.refresh();
-
-    const estimateMessage = await page("email").mailMessages.message;
-    estimateMessage.waitForDisplayed({
-      timeout: 1600000,
-      interval: 5000,
-      timeoutMsg: "Message hasn't arrived at specified timeout",
-    });
-    console.log(await estimateMessage);
-
-    estimateMessage.click();
-
-    const mailedCost = await page("email").mailMessages.price;
-    mailedCost.waitForDisplayed({ timeout: 600000, interval: 5000 });
-    console.log(await mailedCost);
-    const mailedCostTextContent = await mailedCost.getText();
-
-    assert.equal(
-      costTextContent.split(" ")[4],
-      mailedCostTextContent.split(" ")[4],
-      `Invalid value, expected ${costTextContent} got ${mailedCostTextContent}`
-    )*/

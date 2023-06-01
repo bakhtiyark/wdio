@@ -1,9 +1,9 @@
 ﻿const HomePage = require("./pages/home.page");
 const CalculatorPage = require("./pages/calculator.page");
 const SearchResultsPage = require("./pages/searchResult.page");
-const TenMinuteEmailPage = require("./pages/tenMinuteEmail.page");
-const tempMailPage = require("./pages/tempMail.page");
-const tempailPage = require("./pages/tempail.page");
+const TenMinuteEmailPage = require("./pages/emailServices/tenMinuteEmail.page");
+const tempMailPage = require("./pages/emailServices/tempMail.page");
+const tempailPage = require("./pages/emailServices/tempail.page");
 
 function page(name) {
   const items = {
@@ -22,4 +22,6 @@ module.exports = {
   SearchResultsPage,
   TenMinuteEmailPage,
   page,
+  tempMailPage,
+  tempailPage
 };

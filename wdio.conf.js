@@ -60,6 +60,7 @@ exports.config = {
     {
       // capabilities for local browser web tests
       browserName: "chrome", // or "firefox", "microsoftedge", "safari"
+      port: 5555,
       //acceptInsecureCerts: true,
       "goog:chromeOptions": {
         //extensions: [fs.readFileSync(path.join(__dirname, "/tests/lib/uBlock.crx"),"base64" )],
@@ -122,6 +123,21 @@ exports.config = {
         logFileName: "wdio-chromedriver.log", // default
         outputDir: "driver-logs", // overwrites the config.outputDir
         args: ["--silent"],
+      },
+    ],
+    [
+      "geckodriver",
+      // service options
+      {
+        // The path where the output of the Geckodriver server should
+        // be stored (uses the config.outputDir by default when not set).
+        outputDir: "./logs",
+
+        // pass in custom options for Geckodriver, for more information see
+        // https://github.com/webdriverio-community/node-geckodriver#options
+        geckodriverOptions: {
+          log: "debug", // set log level of driver
+        },
       },
     ],
   ],

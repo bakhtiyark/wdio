@@ -8,12 +8,13 @@ class tempailBoxComponent extends BaseComponent {
     return this.rootEl.$(`.kopyala-link`);
   }
   get email() {
-    return this.rootEl.$(`//*[@id="epostalar"]//li//a`);
+    return this.rootEl.$(`#epostalar li:nth-child(2) a`);
     //*[@id="mail"]
-    ////input[@id="eposta_adres"]
+    //input[@id="eposta_adres"]
+    //*[@id="epostalar"]//li//a
   }
   get price() {
-    return this.rootEl.$('//h2[contains(text(),"Estimated Monthly Cost:")]')
+    return $('//h2[contains(text(),"Estimated Monthly Cost:")]')
   }
 }
 

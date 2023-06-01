@@ -1,6 +1,6 @@
-﻿const tempBoxComponent = require("../components/extra/tempBox.component");
-const tempMessagesComponent = require("../components/extra/tempMessages.component");
-const BasePage = require("./base.page");
+﻿const tempBoxComponent = require("../../components/extra/tempBox.component");
+const tempMessagesComponent = require("../../components/extra/tempMessages.component");
+const BasePage = require("../base.page");
 
 class tempMailPage extends BasePage {
   constructor() {
