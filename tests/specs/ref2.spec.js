@@ -134,12 +134,62 @@ describe("Hardcore", function () {
     await cost.waitForDisplayed();
     const costTextContent = await cost.getText();
 
-    //Email manipulation
-
     await page("calculator").estimateBlock.emailFormButton.click();
-
     await page("calculator").exitIframe();
 
+    //Email manipulation
+
+    const calcPageUrl = await browser.getUrl();
+    const emailPageUrl = "https://tempail.com/";
+    await browser.newWindow(emailPageUrl);
+
+    const tempEmailButton = await page("alt2Email").mailBox.copyEmailButton;
+    await tempEmailButton.click();
+
+    await browser.switchWindow(calcPageUrl);
+
+    await page("calculator").enterIframe();
+
+    const tempEmail = await page("calculator").estimateBlock.sendEstimate.item(
+      "email"
+    );
+    await tempEmail.waitForDisplayed({ timeout: 150000, interval: 75000 });
+    await tempEmail.click();
+    await browser.keys(["Control", "v"]);
+    await page(
+      "calculator"
+    ).estimateBlock.sendEstimate.sendEstimateButton.click();
+    await page("calculator").exitIframe();
+
+    await browser.switchWindow(emailPageUrl);
+    //browser.scroll(0, 600);
+
+    const estimateMessage = await page("alt2Email").mailBox.email;
+    estimateMessage.waitForDisplayed({
+      timeout: 1600000,
+      interval: 5000,
+      timeoutMsg: "Message hasn't arrived at specified timeout",
+    });
+    console.log(await estimateMessage);
+
+    estimateMessage.click();
+    await browser.switchToFrame(await $(`//iframe[@id="iframe"]`));
+
+    const mailedCost = await page("alt2Email").mailBox.price;
+    mailedCost.waitForDisplayed({ timeout: 600000, interval: 5000 });
+    console.log(await mailedCost);
+    const mailedCostTextContent = await mailedCost.getText();
+
+    assert.equal(
+      costTextContent.split(" ")[4],
+      mailedCostTextContent.split(" ")[4],
+      `Invalid value, expected ${costTextContent} got ${mailedCostTextContent}`
+    );
+  });
+});
+
+//Email manipulation
+/*
     const calcPageUrl = await browser.getUrl();
     const emailPageUrl = "https://10minutemail.com/";
     await browser.newWindow(emailPageUrl);
@@ -170,8 +220,15 @@ describe("Hardcore", function () {
     await browser.switchWindow(emailPageUrl);
     //browser.scroll(0, 600);
 
+    this.timeout();
+    await browser.refresh();
+
     const estimateMessage = await page("email").mailMessages.message;
-    estimateMessage.waitForDisplayed({ timeout: 1600000, interval: 5000 });
+    estimateMessage.waitForDisplayed({
+      timeout: 1600000,
+      interval: 5000,
+      timeoutMsg: "Message hasn't arrived at specified timeout",
+    });
     console.log(await estimateMessage);
 
     estimateMessage.click();
@@ -185,6 +242,4 @@ describe("Hardcore", function () {
       costTextContent.split(" ")[4],
       mailedCostTextContent.split(" ")[4],
       `Invalid value, expected ${costTextContent} got ${mailedCostTextContent}`
-    );
-  });
-});
+    )*/

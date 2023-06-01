@@ -2,6 +2,8 @@
 const CalculatorPage = require("./pages/calculator.page");
 const SearchResultsPage = require("./pages/searchResult.page");
 const TenMinuteEmailPage = require("./pages/tenMinuteEmail.page");
+const tempMailPage = require("./pages/tempMail.page");
+const tempailPage = require("./pages/tempail.page");
 
 function page(name) {
   const items = {
@@ -9,7 +11,8 @@ function page(name) {
     calculator: new CalculatorPage(),
     searchResults: new SearchResultsPage(),
     email: new TenMinuteEmailPage(),
-    fff: "lala"
+    altEmail: new tempMailPage(),
+    alt2Email: new tempailPage()
   };
   return items[name];
 }

@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const reportDir = "tests/reports";
 const screenshotsDir = "tests/reports/screenshots";
 exports.config = {
@@ -60,6 +61,11 @@ exports.config = {
       // capabilities for local browser web tests
       browserName: "chrome", // or "firefox", "microsoftedge", "safari"
       //acceptInsecureCerts: true,
+      "goog:chromeOptions": {
+        //extensions: [fs.readFileSync(path.join(__dirname, "/tests/lib/uBlock.crx"),"base64" )],
+        //extensions: [fs.readFileSync(path.join(__dirname, "/tests/lib/Ghostery.crx"),"base64" )],
+        //args: ['--disable-gpu'],
+      },
     },
   ],
   //

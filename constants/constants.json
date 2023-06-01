@@ -10,5 +10,9 @@
     "syntaxBashOption": "//li[text()='Bash']",
     "expirationContainer": "select2-postform-expiration-container",
     "expirationOption": "//li[text()='10 Minutes']",
-    "submitBtnClassName": "btn -big"
+    "submitBtnClassName": "btn -big",
+    "developermail": "https://www.developermail.com/",
+    "tempail": "https://tempail.com/",
+    "temp-mail": "https://temp-mail.org/en/",
+    "10minuteemail": "https://10minutemail.com/"
   }
