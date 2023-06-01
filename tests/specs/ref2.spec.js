@@ -172,8 +172,16 @@ describe("Hardcore", function () {
     });
     console.log(await estimateMessage);
     await estimateMessage.click();
-    const messageIframe = await $(`//iframe[@id="iframe"]`)
-    await browser.waitUntil(await messageIframe.isExisting(), { timeout: 500000 });
+    const messageIframe = await $('//iframe[@id="iframe"]');
+    await browser.waitUntil(
+      async () => {
+        console.log(`Target iFrame exists - ${await messageIframe.isExisting()}`)
+        return (await messageIframe.isExisting());
+      },
+      { timeout: 500000 }
+    );
+
+    await messageIframe.waitForDisplayed({ timeout: 350000, interval: 5000 });
     await browser.switchToFrame(messageIframe);
 
     const mailedCost = await page("alt2Email").mailBox.price;
@@ -183,7 +191,7 @@ describe("Hardcore", function () {
 
     assert.equal(
       costTextContent.split(" ")[4],
-      mailedCostTextContent.split(" ")[4],
+      mailedCostTextContent.split(" ")[1],
       `Invalid value, expected ${costTextContent} got ${mailedCostTextContent}`
     );
   });

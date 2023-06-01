@@ -14,7 +14,7 @@ class tempailBoxComponent extends BaseComponent {
     //*[@id="epostalar"]//li//a
   }
   get price() {
-    return $('//h2[contains(text(),"Estimated Monthly Cost:")]')
+    return $('tr:last-child td:last-child h3')
   }
 }
 
