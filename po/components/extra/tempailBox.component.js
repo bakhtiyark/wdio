@@ -13,6 +13,11 @@ class tempailBoxComponent extends BaseComponent {
     //input[@id="eposta_adres"]
     //*[@id="epostalar"]//li//a
   }
+  async enterIframe(){
+    const handles = await browser.getWindowHandles();
+    await browser.switchToWindow(handles[1]);
+    await browser.switchToFrame(2);
+  }
   get price() {
     return $('tr:last-child td:last-child h3')
   }

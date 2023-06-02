@@ -159,8 +159,6 @@ describe("Hardcore", function () {
     await page(
       "calculator"
     ).estimateBlock.sendEstimate.sendEstimateButton.click();
-    await page("calculator").exitIframe();
-
     await browser.switchWindow(emailPageUrl);
     //browser.scroll(0, 600);
 
@@ -172,20 +170,27 @@ describe("Hardcore", function () {
     });
     console.log(await estimateMessage);
     await estimateMessage.click();
-    const messageIframe = await $('//iframe[@id="iframe"]');
+    const messageIframe = await $("#iframe");
     await browser.waitUntil(
       async () => {
-        console.log(`Target iFrame exists - ${await messageIframe.isExisting()}`)
-        return (await messageIframe.isExisting());
+        console.log(
+          `Target iFrame exists - ${await messageIframe.isExisting()}`
+        );
+        console.log(
+          `Window handles available ${await browser.getWindowHandles()}`
+        );
+        return await messageIframe.isExisting();
       },
       { timeout: 500000 }
     );
+    await messageIframe.waitForExist({ timeout: 690000, interval: 5000 });
 
-    await messageIframe.waitForDisplayed({ timeout: 350000, interval: 5000 });
-    await browser.switchToFrame(messageIframe);
+    //await browser.frame(messageIframe);
+    //await browser.frame(2)
+    await browser.switchToFrame(2)
 
     const mailedCost = await page("alt2Email").mailBox.price;
-    await mailedCost.waitForDisplayed({ timeout: 600000, interval: 5000 });
+    await mailedCost.waitForDisplayed({ timeout: 690000, interval: 5000 });
     console.log(await ` Mailed cost is ${mailedCost}`);
     const mailedCostTextContent = await mailedCost.getText();
 
