@@ -1,24 +1,23 @@
-pipeline {
-  agent any
-  stages {
-
-    stage('Installation') {
-      steps {
-        script {
-          echo 'npm install'
-          npm install
-        }
-      }
+node('testing') {
+    stage('Checkout') {
+        echo 'Getting source code...'
+        checkout scm
     }
 
     stage('Build') {
-      steps {
-        script {
-          echo 'Build phase'
-          npm start test2
-        }
-      }
+        echo 'Building dependencies...'
+        sh 'npm i'
     }
 
-  }
-} 
+    stage('Test') {
+        echo 'Testing...'
+        sh 'npm test'
+    }
+
+     post {
+        always {
+            archiveArtifacts artifacts:
+            junit 'tests/reports/*.xml'
+        }
+    }
+}
