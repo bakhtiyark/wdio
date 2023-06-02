@@ -1,22 +1,30 @@
-nodejs('Node v18.15.0') {
-    stage('Checkout') {
-        echo 'Getting source code...'
-        checkout scm
-    }
-    stage('Build') {
-        echo 'Building dependencies...'
-        sh 'npm i'
-    }
+node{
+    pipeline{
+        agent any
+        
+        nodejs('Node v18.15.0') {
+            stages{
+                stage('Checkout') {
+                    echo 'Getting source code...'
+                    checkout scm
+                }
+                stage('Build') {
+                    echo 'Building dependencies...'
+                    sh 'npm i'
+                }
 
-    stage('Test') {
-        echo 'Testing...'
-        sh 'npm test'
-    }
-
-     post {
-        always {
-            archiveArtifacts artifacts:
-            junit 'tests/reports/*.xml'
+                stage('Test') {
+                    echo 'Testing...'
+                    sh 'npm test'
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts:
+                    junit 'tests/reports/*.xml'
+                }
+            }
         }
     }
 }
+
