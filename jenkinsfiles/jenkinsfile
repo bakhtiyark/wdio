@@ -1,9 +1,8 @@
-node('testing') {
+nodejs('Node v18.15.0') {
     stage('Checkout') {
         echo 'Getting source code...'
         checkout scm
     }
-
     stage('Build') {
         echo 'Building dependencies...'
         sh 'npm i'
