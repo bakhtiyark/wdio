@@ -4,8 +4,8 @@ pipeline {
         stage('build') {
             steps {
             	nodejs('node') {
-	            powershell 'npm run install'
-                powershell 'npm run test'
+	            bat 'npm run install'
+                bat 'npm run test'
 	            }
             }
         }
