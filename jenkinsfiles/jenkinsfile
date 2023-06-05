@@ -27,11 +27,7 @@ pipeline{
         stage('Publish') {
             steps{
                 echo 'Publishing Test Coverage...'
-                post {
-                    always {
-                        archiveArtifacts artifacts:
-                        junit 'tests/reports/*.xml'
-                    }
+                archiveArtifacts artifacts: 'tests/reports/*.xml', followSymlinks: false
                 }}
         }
     }
