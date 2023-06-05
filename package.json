@@ -1,7 +1,8 @@
 {
   "name": "wdio",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "WebDriver automated testing project with CI integration",
+  "author": "Bakhtiyar Kussainov",
   "main": "index.js",
   "scripts": {
     "test": "wdio run ./wdio.conf.js --spec tests/specs/ref.spec.js",
@@ -9,8 +10,7 @@
     "wdio": "wdio run ./wdio.conf.js",
     "pastebintest": "wdio run ./wdio.conf.js --spec tests/specs/test.spec.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["webdriver", "selenium", "jenkins", "nodejs", "chai"],
   "license": "ISC",
   "devDependencies": {
     "@wdio/cli": "^8.10.0",

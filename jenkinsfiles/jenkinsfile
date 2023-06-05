@@ -13,8 +13,9 @@ pipeline {
     post {
 
 	    always {
-	            echo 'Publishing reports'
-		        junit 'tests/reports/*.xml'      
+                echo 'Publishing reports'
+		        archiveArtifacts artifacts: 'tests/reports/screenshots/*.png', followSymlinks: false
+                junit 'tests/reports/*.xml'      
 	    }
     }
 }
