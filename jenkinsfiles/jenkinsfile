@@ -16,7 +16,7 @@ pipeline {
 
 	    always {
 	            echo 'Always generate report.'
-		        junit '**/reports/*.xml'      
+		        junit 'tests/reports/*.xml'      
 	    }
     }
 }
