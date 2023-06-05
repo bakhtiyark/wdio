@@ -1,31 +1,38 @@
 pipeline{
     agent any
-    tool name: 'Node v18.15.0', type: 'nodejs'
+    tools {nodejs "node"}
 
     stages("x"){
         stage('Checkout') {
+            steps{
             echo 'Getting source code...'
             checkout scm
+            }
         }
 
         stage('Build') {
-            echo 'Building dependencies...'
-            sh 'npm i'
+            steps{
+                echo 'Building dependencies...'
+                sh 'npm i'
+            }
         }
 
         stage('Test') {
-            echo 'Testing...'
-            sh 'npm test'
+            steps{
+                echo 'Testing...'
+                sh 'npm test'
+            }
         }
 
         stage('Publish') {
-            echo 'Publishing Test Coverage...'
-            post {
-                always {
-                    archiveArtifacts artifacts:
-                    junit 'tests/reports/*.xml'
-                }
-            }
+            steps{
+                echo 'Publishing Test Coverage...'
+                post {
+                    always {
+                        archiveArtifacts artifacts:
+                        junit 'tests/reports/*.xml'
+                    }
+                }}
         }
     }
 
