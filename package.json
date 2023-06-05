@@ -6,8 +6,8 @@
   "scripts": {
     "test": "wdio run ./wdio.conf.js --spec tests/specs/ref.spec.js",
     "test2": "wdio run ./wdio.conf.js --spec tests/specs/ref2.spec.js",
-    "chai": "wdio run ./wdio.conf.js --spec tests/specs/refchai.spec.js",
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "pastebintest": "wdio run ./wdio.conf.js --spec tests/specs/test.spec.js"
   },
   "keywords": [],
   "author": "",
