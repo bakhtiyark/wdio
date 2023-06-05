@@ -1,33 +1,22 @@
-pipeline{
-    agent any
-    tools {nodejs "node"}
-
-    stages("x"){
-        stage('Checkout') {
-            steps{
-            echo 'Getting source code...'
-            checkout scm
+pipeline {
+    agent any 
+    stages {
+        stage('build') {
+            steps {
+            	nodejs('node') {
+	            sh """
+			    npm install 
+	            npm run test
+			    """
+	            }
             }
-        }
-
-        stage('Build') {
-            steps{
-                echo 'Building dependencies...'
-                sh 'npm i'
-            }
-        }
-
-        stage('Test') {
-            steps{
-                echo 'Testing...'
-                sh 'npm test'
-            }
-        }
-
-        stage('Publish') {
-            steps{
-                echo 'Publishing Test Coverage...'
-                archiveArtifacts artifacts: 'tests/reports/*.xml', followSymlinks: false
-                }}
         }
     }
+    post {
+
+	    always {
+	            echo 'Always generate report.'
+		        junit '**/reports/*.xml'      
+	    }
+    }
+}
