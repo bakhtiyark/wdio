@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
             	nodejs('node') {
-	            bat 'npm run install'
+	            bat 'npm i'
                 bat 'npm run test'
 	            }
             }
