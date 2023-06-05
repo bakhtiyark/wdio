@@ -1,28 +1,34 @@
-pipeline{
-    agent any
-    nodejs('Node v18.15.0') {
-        stages{
-            stage('Checkout') {
-                echo 'Getting source code...'
-                checkout scm
-            }
-            stage('Build') {
-                echo 'Building dependencies...'
-                sh 'npm i'
-            }
+node('testing') {
+    stage('Initialize') {
+        echo 'Initializing...'
+        def node = tool name: 'Node v18.15.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        env.PATH = "${node}/bin:${env.PATH}"
+    }
 
-            stage('Test') {
-                echo 'Testing...'
-                sh 'npm test'
-            }
-        }
-        post {
+    stage('Checkout') {
+        echo 'Getting source code...'
+        checkout scm
+    }
+
+    stage('Build') {
+        echo 'Building dependencies...'
+        sh 'npm i'
+    }
+
+    stage('Test') {
+        echo 'Testing...'
+        sh 'npm test'
+    }
+
+    stage('Publish') {
+        echo 'Publishing Test Coverage...'
+		post {
             always {
                 archiveArtifacts artifacts:
                 junit 'tests/reports/*.xml'
             }
         }
     }
-    
 }
+
 
