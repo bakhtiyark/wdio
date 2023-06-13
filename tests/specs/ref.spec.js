@@ -129,6 +129,8 @@ describe("Hurt me plenty", function () {
     await page("calculator").tabsBlock.addToEstimateButton.click();
   });
 
+  //Assertions
+
   describe("Conformance check", () => {
     it("should have same location", async () => {
       const location = await page(
@@ -144,6 +146,7 @@ describe("Hurt me plenty", function () {
         }`
       );
     });
+
     it("Should have same commitment term", async () => {
       const cud = await page(
         "calculator"
@@ -158,6 +161,7 @@ describe("Hurt me plenty", function () {
         }`
       );
     });
+
     it("Should have same VM class", async () => {
       const vmclass = await page(
         "calculator"
@@ -172,6 +176,7 @@ describe("Hurt me plenty", function () {
         }`
       );
     });
+
     it("Should have same instance type", async () => {
       const instance = await page(
         "calculator"
@@ -184,6 +189,7 @@ describe("Hurt me plenty", function () {
           .includes(constants.instance.split(" ")[0])
       );
     });
+
     it("Should have same SSD", async () => {
       const ssd = await page(
         "calculator"
@@ -198,6 +204,7 @@ describe("Hurt me plenty", function () {
         }`
       );
     });
+
     it("Should have same price per month as if filled manually", async () => {
       const cost = await page(
         "calculator"
