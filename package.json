@@ -5,7 +5,7 @@
   "author": "Bakhtiyar Kussainov",
   "main": "index.js",
   "scripts": {
-    "test": "wdio run ./wdio.conf.js --spec tests/specs/.spec.js",
+    "priceCheck": "wdio run ./wdio.conf.js --spec tests/specs/priceCheck.spec.js",
     "test2": "wdio run ./wdio.conf.js --spec tests/specs/ref2.spec.js",
     "wdio": "wdio run ./wdio.conf.js",
     "pastebintest": "wdio run ./wdio.conf.js --spec tests/specs/test.spec.js"

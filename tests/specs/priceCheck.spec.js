@@ -1,131 +1,16 @@
 ﻿// imports
 const { page } = require("../../pageobjects/index");
-const constants = require("../dataLayer.json");
+const dataLayer = require("../dataLayer.json");
 const assert = require("node:assert/strict");
-
 describe("Hurt me plenty", function () {
-  before("Search", async () => {
-    // Start To be refactored
+  before("Get baseline data for further assertions", async () => {
+    // Start
     await page("home").open();
-    const search = await page("home").header.input("search");
-    await search.setValue(constants.searchquery);
-    await page("home").header.submit();
-
-    const searchTarget = await page("searchResults").searchElements.input(
-      constants.searchquery
-    );
-    await searchTarget.waitForDisplayed();
-    await searchTarget.click();
-
+    await page("home").searchText(dataLayer.searchquery)
+    await page("searchResults").goToTargetPage(dataLayer.searchquery)
     // Manipulations with Calculator
     await page("calculator").enterIframe();
-    const quantityElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("quantity");
-    await quantityElement.waitForDisplayed();
-    await quantityElement.setValue(constants.quantity);
-
-    const osElement = await page("calculator").tabsBlock.computeEngineForm.item(
-      "os"
-    );
-    await osElement.waitForDisplayed();
-    await osElement.click();
-    const osValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.os
-    );
-    await osValue.waitForDisplayed();
-    await osValue.click();
-
-    const seriesElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("series");
-    await seriesElement.waitForDisplayed();
-    await seriesElement.click();
-
-    const seriesValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.series
-    );
-    await seriesValue.waitForDisplayed();
-    await seriesValue.click();
-
-    const instanceElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("instance");
-    await instanceElement.waitForDisplayed();
-    await instanceElement.click();
-
-    const instanceValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.instance
-    );
-    await instanceValue.waitForDisplayed(20000);
-    await instanceValue.click();
-
-    const addGPUElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("addGPUs");
-    await addGPUElement.waitForDisplayed();
-    await addGPUElement.click();
-
-    const gpuTypeElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("gpuType");
-    await gpuTypeElement.waitForDisplayed();
-    await gpuTypeElement.click();
-    const gpuTypeValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.gpuType
-    );
-    await gpuTypeValue.waitForDisplayed();
-    await gpuTypeValue.click();
-
-    const gpuCountElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("gpuCount");
-    await gpuCountElement.waitForDisplayed();
-    await gpuCountElement.click();
-
-    const gpuCountValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.gpuCount
-    );
-    await gpuCountValue.waitForDisplayed();
-    await gpuCountValue.click();
-
-    const ssdElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("ssd");
-    await ssdElement.waitForDisplayed();
-    await ssdElement.click();
-
-    const ssdValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.ssd
-    );
-    await ssdValue.waitForDisplayed();
-    await ssdValue.click();
-
-    const locationElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("location");
-    await locationElement.waitForDisplayed();
-    await locationElement.click();
-
-    // NVIDIA Tesla V100 is currently unavailable in Frankfurt, thus alternative location has been selected.
-    const locationValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.locationAlt
-    );
-    await locationValue.waitForDisplayed();
-    await locationValue.click();
-
-    const committedUsageElement = await page(
-      "calculator"
-    ).tabsBlock.computeEngineForm.item("cud");
-    await committedUsageElement.waitForDisplayed();
-    await committedUsageElement.click();
-
-    const commitedUsageValue = await page("calculator").tabsBlock.dropdownValue(
-      constants.cud
-    );
-    await commitedUsageValue.waitForDisplayed();
-    await commitedUsageValue.click();
-
+    await page("calculator").inputData(dataLayer)
     await page("calculator").tabsBlock.addToEstimateButton.click();
   });
 
@@ -140,8 +25,8 @@ describe("Hurt me plenty", function () {
       const locationTextContent = await location.getText();
       assert.equal(
         locationTextContent.split(" ")[1],
-        constants.locationAlt.split(" ")[0],
-        `Invalid value, expected ${constants.locationAlt.split(" ")[0]} got ${
+        dataLayer.locationAlt.split(" ")[0],
+        `Invalid value, expected ${dataLayer.locationAlt.split(" ")[0]} got ${
           locationTextContent.split(" ")[1]
         }`
       );
@@ -155,8 +40,8 @@ describe("Hurt me plenty", function () {
       const cudTextContent = await cud.getText();
       assert.equal(
         cudTextContent.split(" ")[2],
-        constants.cud.split(" ")[0],
-        `Invalid value, expected ${constants.cud.split(" ")[0]} got ${
+        dataLayer.cud.split(" ")[0],
+        `Invalid value, expected ${dataLayer.cud.split(" ")[0]} got ${
           cudTextContent.split(" ")[1]
         }`
       );
@@ -170,8 +55,8 @@ describe("Hurt me plenty", function () {
       const vmclassTextContent = await vmclass.getText();
       assert.equal(
         vmclassTextContent.split(" ")[2],
-        constants.class,
-        `Invalid value, expected ${constants.class} got ${
+        dataLayer.class,
+        `Invalid value, expected ${dataLayer.class} got ${
           vmclassTextContent.split(" ")[1]
         }`
       );
@@ -186,7 +71,7 @@ describe("Hurt me plenty", function () {
       assert.ok(
         instanceTextContent
           .toString()
-          .includes(constants.instance.split(" ")[0])
+          .includes(dataLayer.instance.split(" ")[0])
       );
     });
 
@@ -198,8 +83,8 @@ describe("Hurt me plenty", function () {
       const ssdTextContent = await ssd.getText();
       assert.equal(
         ssdTextContent.split(" ")[2],
-        constants.ssd.split(" ")[0],
-        `Invalid value, expected ${constants.ssd} got ${
+        dataLayer.ssd.split(" ")[0],
+        `Invalid value, expected ${dataLayer.ssd} got ${
           ssdTextContent.split(" ")[2]
         }`
       );
@@ -213,8 +98,8 @@ describe("Hurt me plenty", function () {
       const costTextContent = await cost.getText();
       assert.equal(
         costTextContent.split(" ")[4],
-        constants.estimatedCost,
-        `Invalid value, expected ${constants.estimatedCost} got ${
+        dataLayer.estimatedCost,
+        `Invalid value, expected ${dataLayer.estimatedCost} got ${
           costTextContent.split(" ")[4]
         }`
       );

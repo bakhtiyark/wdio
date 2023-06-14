@@ -65,7 +65,7 @@ exports.config = {
       "goog:chromeOptions": {
         //extensions: [fs.readFileSync(path.join(__dirname, "/tests/lib/uBlock.crx"),"base64" )],
         //extensions: [fs.readFileSync(path.join(__dirname, "/tests/lib/Ghostery.crx"),"base64" )],
-        args: ['--disable-gpu', "--headless"],
+        args: ['--disable-gpu'],
       },
     },
   ],

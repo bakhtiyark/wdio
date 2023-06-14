@@ -9,9 +9,6 @@ class MailMessagesComponent extends BaseComponent {
   }
   get message() {
     return this.rootEl.$(".mail_message");
-    // //*[@id="link-1"]/b
-    //*[@id="link-1"]
-    // //b[contains(text(), "Google Cloud")]
   }
   get price(){
     return this.rootEl.$('//h2[contains(text(),"Estimated Monthly Cost:")]')
