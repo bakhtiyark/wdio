@@ -1,6 +1,6 @@
 ﻿const BaseComponent = require("../common/base.component");
 
-class tempailBoxComponent extends BaseComponent {
+class TempailBoxComponent extends BaseComponent {
   constructor() {
     super(`//html[@lang]`);
   }
@@ -20,4 +20,4 @@ class tempailBoxComponent extends BaseComponent {
   }
 }
 
-module.exports = tempailBoxComponent;
+module.exports = TempailBoxComponent;

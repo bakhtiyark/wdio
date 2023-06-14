@@ -185,8 +185,6 @@ describe("Hardcore", function () {
     );
     await messageIframe.waitForExist({ timeout: 690000, interval: 5000 });
 
-    //await browser.frame(messageIframe);
-    //await browser.frame(2)
     await browser.switchToFrame(2)
 
     const mailedCost = await page("alt2Email").mailBox.price;

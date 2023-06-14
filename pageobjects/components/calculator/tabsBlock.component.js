@@ -7,8 +7,6 @@ class TabsBlockComponent extends BaseComponent {
   constructor() {
     super("md-tabs");
     this.computeEngineForm = new ComputeEngineFormComponent();
-    this.gkeStandardForm = new GkeStandardFormComponent();
-    this.gkeBackupForm = new GkeBackupFormComponent();
   }
   get addToEstimateButton() {
     return this.rootEl.$(`//button[@ng-click="listingCtrl.addComputeServer(ComputeEngineForm);"]`);

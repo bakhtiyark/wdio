@@ -7,7 +7,7 @@ class SearchResultsPage extends BasePage{
         this.searchElements = new SearchElementsComponent()
     }
     async goToTargetPage(searchText){
-        const searchTarget = await page("searchResults").searchElements.input(searchText);
+        const searchTarget = await this.searchElements.input(searchText);
         await searchTarget.waitForDisplayed();
         await searchTarget.click();
     }

@@ -1,6 +1,6 @@
 ﻿const BaseComponent = require("../common/base.component");
 
-class tempMessagesComponent extends BaseComponent {
+class TempMessagesComponent extends BaseComponent {
   constructor() {
     super('.tm-content');
   }
@@ -12,4 +12,4 @@ class tempMessagesComponent extends BaseComponent {
   }
 }
 
-module.exports = tempMessagesComponent;
+module.exports = TempMessagesComponent;

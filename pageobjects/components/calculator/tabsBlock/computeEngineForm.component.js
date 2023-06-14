@@ -10,7 +10,7 @@ class ComputeEngineFormComponent extends BaseComponent {
       `//md-select-menu//md-option[contains(@ng-repeat,'.computeServer')]//div[normalize-space(text())='${text}']`
     );
   }
-
+// to be rewritten using non-angular path (if possible)
   item(name) {
     const selectors = {
       quantity: 'input[ng-model="listingCtrl.computeServer.quantity"]',

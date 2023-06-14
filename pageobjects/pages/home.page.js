@@ -7,7 +7,7 @@ class HomePage extends BasePage {
   async searchText(searchQuery){
     const search = await this.header.input("search");
     await search.setValue(searchQuery);
-    await page("home").header.submit();
+    await this.header.submit();
   }
 }
 module.exports = HomePage;

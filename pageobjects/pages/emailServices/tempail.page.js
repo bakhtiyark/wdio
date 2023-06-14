@@ -1,11 +1,11 @@
-﻿const tempailBoxComponent = require("../../components/extra/tempailBox.component");
+﻿const TempailBoxComponent = require("../../components/extra/tempailBox.component");
 const BasePage = require("../base.page");
 
-class tempailPage extends BasePage {
+class TempailPage extends BasePage {
   constructor() {
     super("https://tempail.com/");
-    this.mailBox = new tempailBoxComponent();
+    this.mailBox = new TempailBoxComponent();
   }
 }
 
-module.exports = tempailPage;
+module.exports = TempailPage;

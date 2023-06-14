@@ -1,6 +1,6 @@
 ﻿const BaseComponent = require("../common/base.component");
 
-class tempBoxComponent extends BaseComponent {
+class TempBoxComponent extends BaseComponent {
   constructor() {
     super(".temp-emailbox");
   }
@@ -9,8 +9,7 @@ class tempBoxComponent extends BaseComponent {
   }
   get email() {
     return this.rootEl.$("#mail");
-    //*[@id="mail"]
   }
 }
 
-module.exports = tempBoxComponent;
+module.exports = TempBoxComponent;

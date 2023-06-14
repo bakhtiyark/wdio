@@ -9,9 +9,10 @@ describe("Hurt me plenty", function () {
     await page("home").searchText(dataLayer.searchquery)
     await page("searchResults").goToTargetPage(dataLayer.searchquery)
     // Manipulations with Calculator
-    await page("calculator").enterIframe();
-    await page("calculator").inputData(dataLayer)
-    await page("calculator").tabsBlock.addToEstimateButton.click();
+    await browser.switchToFrame(await $("//devsite-iframe//iframe"));
+    await browser.switchToFrame(await $("#myFrame"));
+    await page("calculator").fillForm(dataLayer)
+    await page("calculator").submitForm();
   });
 
   //Assertions

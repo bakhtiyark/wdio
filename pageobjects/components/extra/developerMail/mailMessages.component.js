@@ -13,9 +13,6 @@ class MailMessagesComponent extends BaseComponent {
   get price(){
     return this.rootEl.$('//h2[contains(text(),"Estimated Monthly Cost:")]')
   }
-  async enterIframe() {
-    await browser.switchToFrame(await $("#iFrame"));
-  }
 }
 
 module.exports = MailMessagesComponent;

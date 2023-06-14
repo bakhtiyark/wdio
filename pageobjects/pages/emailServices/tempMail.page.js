@@ -1,13 +1,13 @@
-﻿const tempBoxComponent = require("../../components/extra/tempBox.component");
-const tempMessagesComponent = require("../../components/extra/tempMessages.component");
+﻿const TempBoxComponent = require("../../components/extra/tempBox.component");
+const TempMessagesComponent = require("../../components/extra/tempMessages.component");
 const BasePage = require("../base.page");
 
-class tempMailPage extends BasePage {
+class TempMailPage extends BasePage {
   constructor() {
     super("https://temp-mail.org/en/");
-    this.mailBox = new tempBoxComponent();
-    this.mailMessages = new tempMessagesComponent();
+    this.mailBox = new TempBoxComponent();
+    this.mailMessages = new TempMessagesComponent();
   }
 }
 
-module.exports = tempMailPage;
+module.exports = TempMailPage;
