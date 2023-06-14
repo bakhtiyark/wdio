@@ -1,10 +1,10 @@
 ﻿// imports
-const { page } = require("../../po/index");
+const { page } = require("../../pageobjects/index");
 const constants = require("../../constants/compute.json");
 const assert = require("node:assert/strict");
 
-describe("Hurt me plenty", function () {
-  before("Search", async () => {
+describe("Hardcore", function () {
+  it("SendEmail", async () => {
     // Start
     await page("home").open();
     const search = await page("home").header.input("search");
@@ -127,97 +127,77 @@ describe("Hurt me plenty", function () {
     await commitedUsageValue.click();
 
     await page("calculator").tabsBlock.addToEstimateButton.click();
-  });
 
-  //Assertions
+    const cost = await page(
+      "calculator"
+    ).estimateBlock.computerEngineEstimate.item("estimatedCost");
+    await cost.waitForDisplayed();
+    const costTextContent = await cost.getText();
 
-  describe("Conformance check", () => {
-    it("should have same location", async () => {
-      const location = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("location");
-      await location.waitForDisplayed();
-      const locationTextContent = await location.getText();
-      assert.equal(
-        locationTextContent.split(" ")[1],
-        constants.locationAlt.split(" ")[0],
-        `Invalid value, expected ${constants.locationAlt.split(" ")[0]} got ${
-          locationTextContent.split(" ")[1]
-        }`
-      );
+    await page("calculator").estimateBlock.emailFormButton.click();
+    await page("calculator").exitIframe();
+
+    //Email manipulation
+
+    const calcPageUrl = await browser.getUrl();
+    const emailPageUrl = "https://tempail.com/";
+    await browser.newWindow(emailPageUrl);
+
+    const tempEmailButton = await page("alt2Email").mailBox.copyEmailButton;
+    await tempEmailButton.click();
+
+    await browser.switchWindow(calcPageUrl);
+
+    await page("calculator").enterIframe();
+
+    const tempEmail = await page("calculator").estimateBlock.sendEstimate.item(
+      "email"
+    );
+    await tempEmail.waitForDisplayed({ timeout: 150000, interval: 75000 });
+    await tempEmail.click();
+    await browser.keys(["Control", "v"]);
+    await page(
+      "calculator"
+    ).estimateBlock.sendEstimate.sendEstimateButton.click();
+    await browser.switchWindow(emailPageUrl);
+    //browser.scroll(0, 600);
+
+    const estimateMessage = await page("alt2Email").mailBox.email;
+    await estimateMessage.waitForDisplayed({
+      timeout: 1600000,
+      interval: 5000,
+      timeoutMsg: "Message hasn't arrived at specified timeout",
     });
+    console.log(await estimateMessage);
+    await estimateMessage.click();
+    const messageIframe = await $("#iframe");
+    await browser.waitUntil(
+      async () => {
+        console.log(
+          `Target iFrame exists - ${await messageIframe.isExisting()}`
+        );
+        console.log(
+          `Window handles available ${await browser.getWindowHandles()}`
+        );
+        return await messageIframe.isExisting();
+      },
+      { timeout: 500000 }
+    );
+    await messageIframe.waitForExist({ timeout: 690000, interval: 5000 });
 
-    it("Should have same commitment term", async () => {
-      const cud = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("cud");
-      await cud.waitForDisplayed();
-      const cudTextContent = await cud.getText();
-      assert.equal(
-        cudTextContent.split(" ")[2],
-        constants.cud.split(" ")[0],
-        `Invalid value, expected ${constants.cud.split(" ")[0]} got ${
-          cudTextContent.split(" ")[1]
-        }`
-      );
-    });
+    //await browser.frame(messageIframe);
+    //await browser.frame(2)
+    await browser.switchToFrame(2)
 
-    it("Should have same VM class", async () => {
-      const vmclass = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("class");
-      await vmclass.waitForDisplayed();
-      const vmclassTextContent = await vmclass.getText();
-      assert.equal(
-        vmclassTextContent.split(" ")[2],
-        constants.class,
-        `Invalid value, expected ${constants.class} got ${
-          vmclassTextContent.split(" ")[1]
-        }`
-      );
-    });
+    const mailedCost = await page("alt2Email").mailBox.price;
+    await mailedCost.waitForDisplayed({ timeout: 690000, interval: 5000 });
+    console.log(await ` Mailed cost is ${mailedCost}`);
+    const mailedCostTextContent = await mailedCost.getText();
 
-    it("Should have same instance type", async () => {
-      const instance = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("instance");
-      await instance.waitForDisplayed();
-      const instanceTextContent = await instance.getText();
-      assert.ok(
-        instanceTextContent
-          .toString()
-          .includes(constants.instance.split(" ")[0])
-      );
-    });
-
-    it("Should have same SSD", async () => {
-      const ssd = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("ssd");
-      await ssd.waitForDisplayed();
-      const ssdTextContent = await ssd.getText();
-      assert.equal(
-        ssdTextContent.split(" ")[2],
-        constants.ssd.split(" ")[0],
-        `Invalid value, expected ${constants.ssd} got ${
-          ssdTextContent.split(" ")[2]
-        }`
-      );
-    });
-
-    it("Should have same price per month as if filled manually", async () => {
-      const cost = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("estimatedCost");
-      await cost.waitForDisplayed();
-      const costTextContent = await cost.getText();
-      assert.equal(
-        costTextContent.split(" ")[4],
-        constants.estimatedCost,
-        `Invalid value, expected ${constants.estimatedCost} got ${
-          costTextContent.split(" ")[4]
-        }`
-      );
-    });
+    assert.equal(
+      costTextContent.split(" ")[4],
+      mailedCostTextContent.split(" ")[1],
+      `Invalid value, expected ${costTextContent} got ${mailedCostTextContent}`
+    );
   });
 });

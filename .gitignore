@@ -1,9 +1,12 @@
 ﻿## modules
 node_modules
 ## reports
+tests/reports
+jenkinsfiles
 ## unfinished task
 refchai.spec.js
 ## draft
 trash
 driver-logs
 logs
+.vscode

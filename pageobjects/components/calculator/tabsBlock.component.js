@@ -10,7 +10,6 @@ class TabsBlockComponent extends BaseComponent {
     this.gkeStandardForm = new GkeStandardFormComponent();
     this.gkeBackupForm = new GkeBackupFormComponent();
   }
-  //'//*[@id="mainForm"]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[19]/button'
   get addToEstimateButton() {
     return this.rootEl.$(`//button[@ng-click="listingCtrl.addComputeServer(ComputeEngineForm);"]`);
   }

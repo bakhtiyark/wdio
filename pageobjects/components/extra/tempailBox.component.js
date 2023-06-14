@@ -9,9 +9,6 @@ class tempailBoxComponent extends BaseComponent {
   }
   get email() {
     return this.rootEl.$(`#epostalar li:nth-child(2) a`);
-    //*[@id="mail"]
-    //input[@id="eposta_adres"]
-    //*[@id="epostalar"]//li//a
   }
   async enterIframe(){
     const handles = await browser.getWindowHandles();

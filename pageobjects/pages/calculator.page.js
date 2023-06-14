@@ -1,7 +1,6 @@
 ﻿const BasePage = require("./base.page");
 const TabsComponent = require("../components/calculator/tabs.component");
 const TabsBlockComponent = require("../components/calculator/tabsBlock.component");
-const { By } = require("selenium-webdriver");
 const EstimateBlockComponent = require("../components/calculator/estimateBlock.component");
 
 const element = "//iframe[contains(@name,'goog_')]";
