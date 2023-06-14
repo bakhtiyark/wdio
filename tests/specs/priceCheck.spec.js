@@ -1,6 +1,6 @@
 ﻿// imports
 const { page } = require("../../pageobjects/index");
-const constants = require("../../constants/compute.json");
+const constants = require("../dataLayer.json");
 const assert = require("node:assert/strict");
 
 describe("Hurt me plenty", function () {
