@@ -50,6 +50,17 @@ class EstimateBlockComponent extends BaseComponent {
     const costTextContent = await cost.getText();
     return costTextContent.split(" ")[4]
   }
+  // Placeholder, not used yet
+  async getReferenceObject(){
+    const referenceObject = {}
+    referenceObject["price"] = await this.getPrice()
+    referenceObject["location"] = await this.getLocation()
+    referenceObject["ssd"] = await this.getSSD()
+    referenceObject["cud"] = await this.getCUD()
+    referenceObject["instance"] = await this.getInstance()
+    referenceObject["vmclass"] = await this.getVMClass()
+    return referenceObject
+  }
 }
 
 module.exports = EstimateBlockComponent;

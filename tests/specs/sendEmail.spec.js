@@ -1,5 +1,4 @@
-﻿// imports
-const { page } = require("../../pageobjects/index");
+﻿const { page } = require("../../pageobjects/index");
 const constants = require("../dataLayer.json");
 const assert = require("node:assert/strict");
 
@@ -52,7 +51,6 @@ describe("Hardcore", function () {
       interval: 5000,
       timeoutMsg: "Message hasn't arrived at specified timeout",
     });
-    console.log(await estimateMessage);
     await estimateMessage.click();
     const messageIframe = await $("#iframe");
     await browser.waitUntil(
