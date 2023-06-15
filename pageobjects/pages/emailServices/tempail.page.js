@@ -1,4 +1,4 @@
-﻿const TempailBoxComponent = require("../../components/extra/tempailBox.component");
+﻿const TempailBoxComponent = require("../../components/mailServices/tempailBox.component");
 const BasePage = require("../base.page");
 
 class TempailPage extends BasePage {
