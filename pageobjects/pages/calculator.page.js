@@ -10,12 +10,20 @@ class Calculator extends BasePage {
     this.tabsBlock = new TabsBlockComponent();
     this.estimateBlock = new EstimateBlockComponent();
   }
-  // to be removed
-  async exitIframe() {
-    const handles = await browser.getWindowHandles();
-    await browser.switchToWindow(handles[0]);
+  
+  async fillForm(datalayer) {
+    await this.fillQuantity(datalayer);
+    await this.fillOs(datalayer);
+    await this.fillSeries(datalayer);
+    await this.fillInstance(datalayer);
+    await this.fillGPU(datalayer);
+    await this.fillSSD(datalayer);
+    await this.fillLocation(datalayer);
+    await this.fillCommittedUsage(datalayer);
   }
-
+  async submitForm() {
+    await this.tabsBlock.addToEstimateButton.click();
+  }
   async fillQuantity(datalayer) {
     const quantityElement = this.tabsBlock.computeEngineForm.item("quantity");
     await quantityElement.waitForDisplayed();
@@ -39,15 +47,11 @@ class Calculator extends BasePage {
     await seriesValue.click();
   }
   async fillInstance(datalayer) {
-    const instanceElement = await this.tabsBlock.computeEngineForm.item(
-      "instance"
-    );
+    const instanceElement = await this.tabsBlock.computeEngineForm.item("instance");
     await instanceElement.waitForDisplayed();
     await instanceElement.click();
 
-    const instanceValue = await this.tabsBlock.dropdownValue(
-      datalayer.instance
-    );
+    const instanceValue = await this.tabsBlock.dropdownValue(datalayer.instance);
     await instanceValue.waitForDisplayed(20000);
     await instanceValue.click();
   }
@@ -80,44 +84,24 @@ class Calculator extends BasePage {
     await ssdValue.click();
   }
   async fillLocation(datalayer) {
-    const locationElement = await this.tabsBlock.computeEngineForm.item(
-      "location"
-    );
+    const locationElement = await this.tabsBlock.computeEngineForm.item("location");
     await locationElement.waitForDisplayed();
     await locationElement.click();
 
     // NVIDIA Tesla V100 is currently unavailable in Frankfurt, thus alternative location has been selected.
-    const locationValue = await this.tabsBlock.dropdownValue(
-      datalayer.locationAlt
-    );
+    const locationValue = await this.tabsBlock.dropdownValue(datalayer.locationAlt);
     await locationValue.waitForDisplayed();
     await locationValue.click();
   }
   async fillCommittedUsage(datalayer) {
-    const committedUsageElement = await this.tabsBlock.computeEngineForm.item(
-      "cud"
-    );
+    const committedUsageElement = await this.tabsBlock.computeEngineForm.item("cud");
     await committedUsageElement.waitForDisplayed();
     await committedUsageElement.click();
 
-    const commitedUsageValue = await this.tabsBlock.dropdownValue(
-      datalayer.cud
-    );
+    const commitedUsageValue = await this.tabsBlock.dropdownValue(datalayer.cud);
     await commitedUsageValue.waitForDisplayed();
     await commitedUsageValue.click();
   }
-  async fillForm(datalayer) {
-    await this.fillQuantity(datalayer);
-    await this.fillOs(datalayer);
-    await this.fillSeries(datalayer);
-    await this.fillInstance(datalayer);
-    await this.fillGPU(datalayer);
-    await this.fillSSD(datalayer);
-    await this.fillLocation(datalayer);
-    await this.fillCommittedUsage(datalayer);
-  }
-  async submitForm() {
-    await this.tabsBlock.addToEstimateButton.click();
-  }
+  
 }
 module.exports = Calculator;

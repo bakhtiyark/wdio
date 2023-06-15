@@ -1,7 +1,6 @@
 ﻿const BaseComponent = require("../common/base.component");
 const ComputeEngineFormComponent = require("./tabsBlock/computeEngineForm.component");
-const GkeBackupFormComponent = require("./tabsBlock/gkeBackupForm.component");
-const GkeStandardFormComponent = require("./tabsBlock/gkeStandardForm.component");
+
 
 class TabsBlockComponent extends BaseComponent {
   constructor() {

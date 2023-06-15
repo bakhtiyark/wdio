@@ -10,25 +10,25 @@ class ComputeEngineFormComponent extends BaseComponent {
       `//md-select-menu//md-option[contains(@ng-repeat,'.computeServer')]//div[normalize-space(text())='${text}']`
     );
   }
-// to be rewritten using non-angular path (if possible)
+
   item(name) {
     const selectors = {
-      quantity: 'input[ng-model="listingCtrl.computeServer.quantity"]',
-      label: 'input[ng-model="listingCtrl.computeServer.label"]',
-      os: '[ng-model="listingCtrl.computeServer.os"]',
-      class: '[ng-model="listingCtrl.computeServer.class"]',
-      family: '[ng-model="listingCtrl.computeServer.family"]',
-      series: '[ng-model="listingCtrl.computeServer.series"]',
-      instance: '[ng-model="listingCtrl.computeServer.instance"]',
-      threads: '[ng-model="listingCtrl.computeServer.threadPerCore"]',
-      bootDiskType: '[ng-model="listingCtrl.computeServer.bootDiskType"]',
-      bootDiskSize: 'input[ng-model="listingCtrl.computeServer.bootDiskSize"]',
-      addGPUs: '[ng-model="listingCtrl.computeServer.addGPUs"]',
-      gpuType: '[ng-model="listingCtrl.computeServer.gpuType"]',
-      gpuCount: '[ng-model="listingCtrl.computeServer.gpuCount"]',
-      ssd: '[ng-model="listingCtrl.computeServer.ssd"]',
-      location: '[ng-model="listingCtrl.computeServer.location"]',
-      cud: '[ng-model="listingCtrl.computeServer.cud"]',
+      quantity: '//form//input[@id="input_96"]',
+      label: '//form//input[@id="input_97"]',
+      os: '//form//*[@id="select_value_label_88"]',
+      class: '//form//*[@id="select_113"]',
+      family: '//form//*[@id="select_119"]',
+      series: '//form//*[@id="select_121"]',
+      instance: '//form//*[@id="select_123"]',
+      threads: '//form//*[@id="select_224"]',
+      bootDiskType: '//form//*[@id="select_125"]',
+      bootDiskSize: '//form//*[@id="input_127"]',
+      addGPUs: '//form//md-checkbox[@aria-label="Add GPUs"]',
+      gpuType: '//form//*[@id="select_494"]',
+      gpuCount: '//form//*[@id="select_496"]',
+      ssd: '//form//*[@id="select_447"]',
+      location: '//form//*[@id="select_129"]',
+      cud: '//form//*[@id="select_136"]',
     };
     return this.rootEl.$(selectors[name]);
   }

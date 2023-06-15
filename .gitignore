@@ -10,6 +10,7 @@ refchai.spec.js
 tests/lib
 
 ## draft
+helpers
 trash
 driver-logs
 logs

@@ -1,10 +1,10 @@
-﻿// imports
-const { page } = require("../../pageobjects/index");
+﻿const { page } = require("../../pageobjects/index");
 const dataLayer = require("../dataLayer.json");
 const assert = require("node:assert/strict");
+
 describe("Hurt me plenty", function () {
   before("Get baseline data for further assertions", async () => {
-    // Start
+    // Opening up and searching for required mode
     await page("home").open();
     await page("home").searchText(dataLayer.searchquery)
     await page("searchResults").goToTargetPage(dataLayer.searchquery)
@@ -19,91 +19,33 @@ describe("Hurt me plenty", function () {
 
   describe("Conformance check", () => {
     it("should have same location", async () => {
-      const location = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("location");
-      await location.waitForDisplayed();
-      const locationTextContent = await location.getText();
-      assert.equal(
-        locationTextContent.split(" ")[1],
-        dataLayer.locationAlt.split(" ")[0],
-        `Invalid value, expected ${dataLayer.locationAlt.split(" ")[0]} got ${
-          locationTextContent.split(" ")[1]
-        }`
-      );
+      let location = await page("calculator").estimateBlock.getLocation()
+      assert.equal(location, dataLayer.locationAlt.split(" ")[0]);
     });
 
     it("Should have same commitment term", async () => {
-      const cud = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("cud");
-      await cud.waitForDisplayed();
-      const cudTextContent = await cud.getText();
-      assert.equal(
-        cudTextContent.split(" ")[2],
-        dataLayer.cud.split(" ")[0],
-        `Invalid value, expected ${dataLayer.cud.split(" ")[0]} got ${
-          cudTextContent.split(" ")[1]
-        }`
-      );
+      const cud = await page("calculator").estimateBlock.getCUD()
+      assert.equal(cud, dataLayer.cud.split(" ")[0]);
     });
 
     it("Should have same VM class", async () => {
-      const vmclass = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("class");
-      await vmclass.waitForDisplayed();
-      const vmclassTextContent = await vmclass.getText();
-      assert.equal(
-        vmclassTextContent.split(" ")[2],
-        dataLayer.class,
-        `Invalid value, expected ${dataLayer.class} got ${
-          vmclassTextContent.split(" ")[1]
-        }`
-      );
+      const vm = await page("calculator").estimateBlock.getVMClass()
+      assert.equal(vm, dataLayer.class);
     });
 
     it("Should have same instance type", async () => {
-      const instance = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("instance");
-      await instance.waitForDisplayed();
-      const instanceTextContent = await instance.getText();
-      assert.ok(
-        instanceTextContent
-          .toString()
-          .includes(dataLayer.instance.split(" ")[0])
-      );
+      const instance = await page("calculator").estimateBlock.getInstance()
+      assert.ok(instance.includes(dataLayer.instance.split(" ")[0]));
     });
 
     it("Should have same SSD", async () => {
-      const ssd = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("ssd");
-      await ssd.waitForDisplayed();
-      const ssdTextContent = await ssd.getText();
-      assert.equal(
-        ssdTextContent.split(" ")[2],
-        dataLayer.ssd.split(" ")[0],
-        `Invalid value, expected ${dataLayer.ssd} got ${
-          ssdTextContent.split(" ")[2]
-        }`
-      );
+      const ssd = await page("calculator").estimateBlock.getSSD();
+      assert.equal(ssd, dataLayer.ssd.split(" ")[0]);
     });
 
     it("Should have same price per month as if filled manually", async () => {
-      const cost = await page(
-        "calculator"
-      ).estimateBlock.computerEngineEstimate.item("estimatedCost");
-      await cost.waitForDisplayed();
-      const costTextContent = await cost.getText();
-      assert.equal(
-        costTextContent.split(" ")[4],
-        dataLayer.estimatedCost,
-        `Invalid value, expected ${dataLayer.estimatedCost} got ${
-          costTextContent.split(" ")[4]
-        }`
-      );
+      const cost = await page("calculator").estimateBlock.getPrice()
+      assert.equal(cost, dataLayer.estimatedCost);
     });
   });
 });
