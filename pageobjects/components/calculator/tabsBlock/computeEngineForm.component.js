@@ -23,7 +23,7 @@ class ComputeEngineFormComponent extends BaseComponent {
       threads: '//form//*[@id="select_224"]',
       bootDiskType: '//form//*[@id="select_125"]',
       bootDiskSize: '//form//*[@id="input_127"]',
-      addGPUs: '//form//md-checkbox[@aria-label="Add GPUs"]',
+      addGPUs: '//form[@name="ComputeEngineForm"]//*[@aria-label="Add GPUs"]',
       gpuType: '//form//*[@id="select_494"]',
       gpuCount: '//form//*[@id="select_496"]',
       ssd: '//form//*[@id="select_447"]',
