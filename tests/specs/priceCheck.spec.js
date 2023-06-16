@@ -2,7 +2,7 @@
 const dataLayer = require("../dataLayer.json");
 const assert = require("node:assert/strict");
 
-describe("Hurt me plenty", function () {
+describe("Price check", function () {
   before("Get baseline data for further assertions", async () => {
     // Opening up and searching for required mode
     await page("home").open();

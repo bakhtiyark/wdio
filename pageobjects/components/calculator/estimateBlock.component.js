@@ -61,6 +61,13 @@ class EstimateBlockComponent extends BaseComponent {
     referenceObject["vmclass"] = await this.getVMClass()
     return referenceObject
   }
+  async sendEstimateMessage(){
+    const tempEmail = await this.sendEstimate.item("email");
+    await tempEmail.waitForDisplayed({ timeout: 150000, interval: 75000 });
+    await tempEmail.click();
+    await browser.keys(["Control", "v"]);
+    await this.sendEstimate.sendEstimateButton.click();
+  }
 }
 
 module.exports = EstimateBlockComponent;

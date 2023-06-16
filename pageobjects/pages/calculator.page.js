@@ -59,9 +59,11 @@ class Calculator extends BasePage {
     const addGPUElement = await this.tabsBlock.computeEngineForm.item("addGPUs");
     await addGPUElement.waitForDisplayed();
     await addGPUElement.click();
+    
     const gpuTypeElement = await this.tabsBlock.computeEngineForm.item("gpuType");
     await gpuTypeElement.waitForDisplayed();
     await gpuTypeElement.click();
+
     const gpuTypeValue = await this.tabsBlock.dropdownValue(datalayer.gpuType);
     await gpuTypeValue.waitForDisplayed();
     await gpuTypeValue.click();

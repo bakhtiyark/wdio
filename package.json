@@ -6,9 +6,8 @@
   "main": "index.js",
   "scripts": {
     "priceCheck": "wdio run ./wdio.conf.js --spec tests/specs/priceCheck.spec.js",
-    "test2": "wdio run ./wdio.conf.js --spec tests/specs/ref2.spec.js",
-    "wdio": "wdio run ./wdio.conf.js",
-    "pastebintest": "wdio run ./wdio.conf.js --spec tests/specs/test.spec.js"
+    "sendEmail": "wdio run ./wdio.conf.js --spec tests/specs/sendEmail.spec.js",
+    "wdio": "wdio run ./wdio.conf.js"
   },
   "keywords": ["webdriver", "selenium", "jenkins", "nodejs", "chai"],
   "license": "ISC",
