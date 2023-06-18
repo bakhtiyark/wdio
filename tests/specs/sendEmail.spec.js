@@ -1,5 +1,5 @@
 ﻿const { page } = require("../../pageobjects/index");
-const dataLayer = require("../dataLayer.json");
+const dataLayer = require("../../constants/dataLayer.json");
 const assert = require("node:assert/strict");
 
 describe("Send Email", function () {

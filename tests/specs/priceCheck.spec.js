@@ -1,5 +1,5 @@
 ﻿const { page } = require("../../pageobjects/index");
-const dataLayer = require("../dataLayer.json");
+const dataLayer = require("../../constants/dataLayer.json");
 const assert = require("node:assert/strict");
 
 describe("Price check", function () {
@@ -19,32 +19,32 @@ describe("Price check", function () {
 
   describe("Conformance check", () => {
     it("should have same location", async () => {
-      let location = await page("calculator").estimateBlock.getLocation()
+      let location = await page("calculator").estimateBlock.getData("location", 1)
       assert.equal(location, dataLayer.locationAlt.split(" ")[0]);
     });
 
     it("Should have same commitment term", async () => {
-      const cud = await page("calculator").estimateBlock.getCUD()
+      const cud = await page("calculator").estimateBlock.getData("cud", 2);
       assert.equal(cud, dataLayer.cud.split(" ")[0]);
     });
 
     it("Should have same VM class", async () => {
-      const vm = await page("calculator").estimateBlock.getVMClass()
+      const vm = await page("calculator").estimateBlock.getData("class", 2);
       assert.equal(vm, dataLayer.class);
     });
 
     it("Should have same instance type", async () => {
-      const instance = await page("calculator").estimateBlock.getInstance()
-      assert.ok(instance.includes(dataLayer.instance.split(" ")[0]));
+      const instance = await page("calculator").estimateBlock.getData("instance", 2, /[\s]/)
+      console.log(`API instance ${await instance}`)
+      assert.ok(dataLayer.instance.includes(instance));
     });
 
     it("Should have same SSD", async () => {
-      const ssd = await page("calculator").estimateBlock.getSSD();
+      const ssd = await page("calculator").estimateBlock.getData("ssd", 2);
       assert.equal(ssd, dataLayer.ssd.split(" ")[0]);
     });
-
     it("Should have same price per month as if filled manually", async () => {
-      const cost = await page("calculator").estimateBlock.getPrice()
+      const cost = await page("calculator").estimateBlock.getData("estimatedCost", 4)
       assert.equal(cost, dataLayer.estimatedCost);
     });
   });
