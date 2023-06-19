@@ -12,6 +12,8 @@ class Calculator extends BasePage {
   }
   
   async fillForm(datalayer) {
+    await browser.switchToFrame(await $("//devsite-iframe//iframe"));
+    await browser.switchToFrame(await $("#myFrame"));
     await this.fillQuantity(datalayer);
     await this.fillOs(datalayer);
     await this.fillSeries(datalayer);

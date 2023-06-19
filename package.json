@@ -7,6 +7,7 @@
   "scripts": {
     "priceCheck": "wdio run ./wdio.conf.js --spec tests/specs/priceCheck.spec.js",
     "sendEmail": "wdio run ./wdio.conf.js --spec tests/specs/sendEmail.spec.js",
+    "secret": "wdio run ./wdio.conf.js --spec trash/newSpec.spec.js",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "keywords": ["webdriver", "selenium", "jenkins", "nodejs", "chai"],

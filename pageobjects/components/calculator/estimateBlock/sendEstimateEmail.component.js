@@ -9,11 +9,8 @@ class SendEstimateEmailComponent extends BaseComponent {
     return this.rootEl.$(`//button[contains(text(),"Send Email")]`);
   }
 
-  item(name) {
-    const selectors = {
-      email: `//input[@ng-model="emailQuote.user.email"]`,
-    };
-    return this.rootEl.$(selectors[name]);
+  get email() {
+    return this.rootSelector.$(`//input[@ng-model="emailQuote.user.email"]`);
   }
 }
 

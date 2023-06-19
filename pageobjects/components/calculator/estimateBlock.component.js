@@ -23,7 +23,7 @@ class EstimateBlockComponent extends BaseComponent {
     return result;
   }
   async sendEstimateMessage() {
-    const tempEmail = await this.sendEstimate.item("email");
+    const tempEmail = await this.sendEstimate.email;
     await tempEmail.waitForDisplayed({ timeout: 150000, interval: 75000 });
     await tempEmail.click();
     await browser.keys(["Control", "v"]);
