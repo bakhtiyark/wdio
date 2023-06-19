@@ -1,6 +1,7 @@
 ﻿const HomePage = require("./pages/home.page");
 const CalculatorPage = require("./pages/calculator.page");
 const SearchResultsPage = require("./pages/searchResult.page");
+const TempailPage = require("./pages/emailServices/tempail.page")
 
 class Page {
   constructor() {

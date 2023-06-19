@@ -18,7 +18,7 @@ describe("Price check", function () {
   describe("Conformance check", () => {
     it("should have same location", async () => {
       let location = await page.calculator.estimateBlock.getData("location", 1);
-      assert.equal(location, dataLayer.locationAlt.split(" ")[0]);
+      assert.equal(location, dataLayer.location.split(" ")[0]);
     });
 
     it("Should have same commitment term", async () => {

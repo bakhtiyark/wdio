@@ -5,12 +5,6 @@ class ComputeEngineFormComponent extends BaseComponent {
     super("form[name=ComputeEngineForm]");
   }
 
-  getlocationtValue(text) {
-    return browser.$(
-      `//md-select-menu//md-option[contains(@ng-repeat,'.computeServer')]//div[normalize-space(text())='${text}']`
-    );
-  }
-
   item(name) {
     const selectors = {
       quantity: '//form//input[@id="input_96"]',
@@ -23,7 +17,7 @@ class ComputeEngineFormComponent extends BaseComponent {
       threads: '//form//*[@id="select_224"]',
       bootDiskType: '//form//*[@id="select_125"]',
       bootDiskSize: '//form//*[@id="input_127"]',
-      addGPUs: '//*[@ng-model="listingCtrl.computeServer.addGPUs"]',
+      addGPUs: '//md-checkbox[@aria-label="Add GPUs"]',
       gpuType: `//md-select[@placeholder="GPU type"]`,
       gpuCount: `//md-select[@placeholder="Number of GPUs"]`,
       ssd: '//form//*[@id="select_447"]',

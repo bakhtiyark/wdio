@@ -8,15 +8,12 @@ class EstimateBlockComponent extends BaseComponent {
     this.computerEngineEstimate = new ComputeEngineEstimateComponent();
     this.sendEstimate = new SendEstimateEmailComponent();
   }
-  item(text) {
-    return this.rootEl.$(`//div[contains(text())='${text}']`);
-  }
   get emailFormButton() {
     return this.rootEl.$(`//button[@id="Email Estimate"]`);
   }
 
-  async getData(item, index, limiter = " ") {
-    const itemElement = await this.computerEngineEstimate.item(item);
+  async getData(target, index, limiter = " ") {
+    const itemElement = await this.computerEngineEstimate.item(target);
     await itemElement.waitForDisplayed();
     const itemElementTextContent = await itemElement.getText();
     const result = await itemElementTextContent.split(limiter)[index];

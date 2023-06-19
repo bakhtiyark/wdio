@@ -15,12 +15,6 @@ class TabsBlockComponent extends BaseComponent {
       `//body/div/md-select-menu//md-option//div[normalize-space(text())='${text}']`
     );
   }
-  //to be replaced with less verbose
-  item(text) {
-    return this.rootEl.$(
-      `//*[@id="mainForm"]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[19]/button[contains(text())='${text}']`
-    );
-  }
 }
 
 module.exports = TabsBlockComponent;

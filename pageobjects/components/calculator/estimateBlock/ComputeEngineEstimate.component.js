@@ -5,12 +5,6 @@ class ComputeEngineEstimateComponent extends BaseComponent {
     super("md-content #compute");
   }
 
-  getlocationtValue(text) {
-    return browser.$(
-      `//md-select-menu//md-option[contains(@ng-repeat,'.computeServer')]//div[normalize-space(text())='${text}']`
-    );
-  }
-  //to be replaced
   item(name) {
     const selectors = {
       location: '//div[contains(text(),"Region:")]',
