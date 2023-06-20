@@ -11,41 +11,21 @@ describe("Send Email", function () {
     // Manipulations with Calculator
     await page.calculator.fillForm(dataLayer);
     await page.calculator.submitForm();
-
-    //To Be Refactored
-    const cost = await page("calculator").estimateBlock.getPrice();
-
-    await page("calculator").estimateBlock.emailFormButton.click();
-    const handles = await browser.getWindowHandles();
-    await browser.switchToWindow(handles[0]);
+    const cost = await page.calculator.estimateBlock.getData("estimatedCost", 4);
+    await page.calculator.estimateBlock.openEmailForm();
     const calcPageUrl = await browser.getUrl();
 
     //Email manipulation
-    const emailPageUrl = "https://tempail.com/";
-    await browser.newWindow(emailPageUrl);
-    await page("alt2Email").copyEmail();
+    await browser.newWindow(dataLayer.tempail);
+    await page.email.copyEmail();
     await browser.switchWindow(calcPageUrl);
-
-    await browser.switchToFrame(await $("//devsite-iframe//iframe"));
-    await browser.switchToFrame(await $("#myFrame"));
-
-    await page("calculator").estimateBlock.sendEstimateMessage();
-
-    await browser.switchWindow(emailPageUrl);
-
-    await page("alt2Email").receiveEstimate();
-
-    const messageIframe = await $("#iframe");
-    await messageIframe.waitForExist({ timeout: 690000, interval: 5000 });
-    await browser.switchToFrame(2);
-
-    const mailedPrice = await page("alt2Email").getMailedPrice();
+    await page.calculator.estimateBlock.sendEstimateMessage();
+    
+    await browser.switchWindow(dataLayer.tempail);
+    await page.email.receiveEstimate();
+    const mailedPrice = await page.email.getMailedPrice();
 
     //Assertion
-    assert.equal(
-      cost,
-      mailedPrice,
-      `Invalid value, expected ${cost} got ${mailedPrice}`
-    );
+    assert.equal(cost, mailedPrice);
   });
 });

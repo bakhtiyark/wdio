@@ -11,6 +11,11 @@ class EstimateBlockComponent extends BaseComponent {
   get emailFormButton() {
     return this.rootEl.$(`//button[@id="Email Estimate"]`);
   }
+  async openEmailForm(){
+    await this.emailFormButton.click();
+    const handles = await browser.getWindowHandles();
+    await browser.switchToWindow(handles[0]);
+  }
 
   async getData(target, index, limiter = " ") {
     const itemElement = await this.computerEngineEstimate.item(target);
@@ -20,9 +25,9 @@ class EstimateBlockComponent extends BaseComponent {
     return result;
   }
   async sendEstimateMessage() {
-    const tempEmail = await this.sendEstimate.email;
-    await tempEmail.waitForDisplayed({ timeout: 150000, interval: 75000 });
-    await tempEmail.click();
+    await browser.switchToFrame(await $("//devsite-iframe//iframe"));
+    await browser.switchToFrame(await $("#myFrame"));
+    await this.sendEstimate.email.click();
     await browser.keys(["Control", "v"]);
     await this.sendEstimate.sendEstimateButton.click();
   }

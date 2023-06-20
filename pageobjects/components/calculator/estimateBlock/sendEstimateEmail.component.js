@@ -10,7 +10,7 @@ class SendEstimateEmailComponent extends BaseComponent {
   }
 
   get email() {
-    return this.rootSelector.$(`//input[@ng-model="emailQuote.user.email"]`);
+    return this.rootEl.$(`//input[@ng-model="emailQuote.user.email"]`);
   }
 }
 

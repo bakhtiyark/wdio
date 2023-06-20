@@ -4,7 +4,7 @@ const assert = require("node:assert/strict");
 
 describe("Price check", function () {
   before("Get baseline data for further assertions", async () => {
-    // Opening up and searching for required mode
+    // Opening up and searching for required page
     await page.home.open();
     await page.home.searchText(dataLayer.searchquery);
     await page.searchResults.goToTargetPage(dataLayer.searchquery);

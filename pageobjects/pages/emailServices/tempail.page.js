@@ -9,6 +9,7 @@ class TempailPage extends BasePage {
   async copyEmail(){
     const tempEmailButton = await this.mailBox.copyEmailButton;
     await tempEmailButton.click();
+    console.log(`Successfully copied ${tempEmailButton}`)
   }
   async receiveEstimate(){
     const estimateMessage = await this.mailBox.email;
@@ -20,6 +21,10 @@ class TempailPage extends BasePage {
     await estimateMessage.click();
   }
   async getMailedPrice(){
+    const messageIframe = await $("#iframe");
+    await messageIframe.waitForExist({ timeout: 690000, interval: 5000 });
+    await browser.switchToFrame(2);
+
     const mailedCost = await this.mailBox.price;
     await mailedCost.waitForDisplayed({ timeout: 690000, interval: 5000 });
     const mailedCostTextContent = await mailedCost.getText();
