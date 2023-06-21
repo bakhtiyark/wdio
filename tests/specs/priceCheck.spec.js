@@ -32,7 +32,7 @@ describe("Price check", function () {
     });
 
     it("Should have same instance type", async () => {
-      const instance = await page.calculator.estimateBlock.getData("instance", 2, /[\s]/);
+      const instance = await page.calculator.estimateBlock.getData("instance", 2);
       assert.ok(dataLayer.instance.includes(instance));
     });
 

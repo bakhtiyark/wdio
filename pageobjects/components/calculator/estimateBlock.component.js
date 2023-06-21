@@ -17,11 +17,11 @@ class EstimateBlockComponent extends BaseComponent {
     await browser.switchToWindow(handles[0]);
   }
 
-  async getData(target, index, limiter = " ") {
+  async getData(target, index) {
     const itemElement = await this.computerEngineEstimate.item(target);
     await itemElement.waitForDisplayed();
     const itemElementTextContent = await itemElement.getText();
-    const result = await itemElementTextContent.split(limiter)[index];
+    const result = await itemElementTextContent.split(/[\s]/)[index];
     return result;
   }
   async sendEstimateMessage() {
