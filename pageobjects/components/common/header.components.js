@@ -4,15 +4,7 @@ class HeaderComponent extends BaseComponent {
   constructor() {
     super(".devsite-header--inner");
   }
-  get rootEl() {
-    return $(this.rootSelector);
-  }
-  input(name) {
-    const selectors = {
-      search: ".devsite-search-field",
-    };
-    return this.rootEl.$(selectors[name.toLowerCase()]);
-  }
+  get input() {return this.rootEl.$(".devsite-search-field");}
 }
 
 module.exports = HeaderComponent;

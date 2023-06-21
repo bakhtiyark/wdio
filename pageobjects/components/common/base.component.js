@@ -2,9 +2,7 @@
   constructor(rootSelector) {
     this.rootSelector = rootSelector;
   }
-  get rootEl() {
-    return $(this.rootSelector);
-  }
+  get rootEl() {return $(this.rootSelector);}
   submit() {
     browser.performActions([
       {

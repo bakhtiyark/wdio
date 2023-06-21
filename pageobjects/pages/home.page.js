@@ -4,9 +4,8 @@ class HomePage extends BasePage {
   constructor() {
     super("/");
   }
-  async searchText(searchQuery){
-    const search = await this.header.input("search");
-    await search.setValue(searchQuery);
+  async searchText(searchQuery){;
+    await this.header.input.setValue(searchQuery);
     await this.header.submit();
   }
 }
