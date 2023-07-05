@@ -1,5 +1,17 @@
 ﻿## modules
 node_modules
-constants
+
+## reports
+tests/reports
+jenkinsfiles
+
+## unfinished task
+refchai.spec.js
+tests/lib
+
 ## draft
-trash.js
+helpers
+trash
+driver-logs
+logs
+.vscode
