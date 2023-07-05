@@ -9,7 +9,6 @@ class TempailPage extends BasePage {
   async copyEmail(){
     const tempEmailButton = await this.mailBox.copyEmailButton;
     await tempEmailButton.click();
-    console.log(`Successfully copied ${tempEmailButton}`)
   }
   async receiveEstimate(){
     const estimateMessage = await this.mailBox.email;
